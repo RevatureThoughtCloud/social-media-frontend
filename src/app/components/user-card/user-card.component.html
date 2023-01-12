@@ -1,5 +1,7 @@
 <mat-card class="user-card">
-    <div class="user-circle"></div>
+    <a [routerLink]="['/profile']">
+        <div class="user-circle"></div>
+    </a>
     <mat-divider></mat-divider>
     <p style="padding-top: 1em; font-weight: bold;">
         {{user.firstName}} {{user.lastName}}
@@ -7,5 +9,4 @@
     <p>
         {{user.email}}
     </p>
-    
 </mat-card>
