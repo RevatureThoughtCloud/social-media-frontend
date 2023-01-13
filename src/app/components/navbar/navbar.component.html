@@ -1,7 +1,16 @@
 <p>
-    <mat-toolbar>
-        <span [routerLink]="['/post-feed']">ThoughtCloud</span>
-        <span class="spacer"></span>
-        <button mat-button (click)="logout();">Logout</button>
-    </mat-toolbar>
+  <mat-toolbar>
+    <span [routerLink]="['/post-feed']">ThoughtCloud</span>
+    <span class="spacer"></span>
+    <button
+      mat-icon-button
+      color="accent"
+      aria-label="Example icon button with a menu icon"
+      (click)="toggleTheme()"
+    >
+      <mat-icon>invert_colors</mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">Logout</button>
+  </mat-toolbar>
 </p>
