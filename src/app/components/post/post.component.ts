@@ -48,4 +48,29 @@ export class PostComponent implements OnInit {
         this.toggleReplyToPost();
       });
   };
+
+  likePost(element: any) {
+    //send this.post and this.authService.currentUser
+    //to this.postService
+    element.className = "fa-solid fa-heart-circle-check";
+  }
+
+  likeEnter(element: any) {
+    if (element.className == "fa-regular fa-heart") {
+      element.className = "fa-solid fa-heart";
+    } else {
+      element.className = "fa-regular fa-heart";
+    }
+  }
+
+  likeLeave(element: any) {
+    if (element.classList.contains("fa-heart-circle-check")) {
+      element.className = "fa-solid fa-heart";
+    }
+     else if (element.classList.contains("fa-regular")) {
+      element.className = "fa-solid fa-heart";
+    } else {
+      element.className = "fa-regular fa-heart";
+    }
+  }
 }
