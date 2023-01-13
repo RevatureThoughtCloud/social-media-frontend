@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "post-feed", component: PostFeedPageComponent },
-  { path: "profile", component: UserProfileComponent }
+  { path: "profile/:id", component: UserProfileComponent },
 ];
 
 @NgModule({
