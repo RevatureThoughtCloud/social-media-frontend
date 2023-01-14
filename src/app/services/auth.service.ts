@@ -9,7 +9,7 @@ import User from '../models/User';
 })
 export class AuthService {
   authUrl: string = `${environment.baseUrl}/auth`;
-  currentUser: User = new User(0, '', '', '');;
+  currentUser: User = new User(0, '', '', '', '');
 
   constructor(private http: HttpClient) {}
 
@@ -34,20 +34,22 @@ export class AuthService {
 
   logout(): void {
     this.http.post(`${this.authUrl}/logout`, null).subscribe();
-    this.currentUser = new User(0, '', '', '');
+    this.currentUser = new User(0, '', '', '', '');
   }
 
   register(
     firstName: string,
     lastName: string,
     email: string,
-    password: string
+    password: string,
+    userName: string
   ): Observable<any> {
     const payload = {
       firstName: firstName,
       lastName: lastName,
       email: email,
       password: password,
+      username: userName,
     };
     return this.http.post<any>(`${this.authUrl}/register`, payload, {
       headers: environment.headers,

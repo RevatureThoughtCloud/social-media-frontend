@@ -10,7 +10,7 @@ import Post from '../models/Post';
 export class PostService {
   postUrl: string = `${environment.baseUrl}/post`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.postUrl}`, {
@@ -21,6 +21,13 @@ export class PostService {
 
   getAllTopPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.postUrl}/feed`, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    });
+  }
+
+  getPostsByAuthor(authorId: number): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.postUrl}/author/${authorId}`, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
     });

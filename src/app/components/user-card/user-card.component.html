@@ -1,5 +1,5 @@
 <mat-card class="user-card">
-    <a [routerLink]="['/profile']">
+    <a [routerLink]="['/profile/', user.id]">
         <div class="user-circle"></div>
     </a>
     <mat-divider></mat-divider>
@@ -9,4 +9,5 @@
     <p>
         {{user.email}}
     </p>
+
 </mat-card>
