@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -9,16 +9,22 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  @HostBinding('class') className = '';
-
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
   ngOnDestroy() {}
 
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
   logout() {
     this.authService.logout();
+    this.router.navigate(['login']);
+  }
+
+  goToLogin() {
     this.router.navigate(['login']);
   }
 
