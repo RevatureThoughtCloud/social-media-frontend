@@ -4,16 +4,16 @@ import User from 'src/app/models/User';
 
 import { UserCardComponent } from './user-card.component';
 
-fdescribe('UserCardComponent', () => {
+describe('UserCardComponent', () => {
   let component: UserCardComponent;
   let fixture: ComponentFixture<UserCardComponent>;
 
   beforeEach(async () => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule],
-      declarations: [ UserCardComponent ],
+      declarations: [UserCardComponent],
       providers: [HttpClient]
-      }).compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(UserCardComponent);
     component = fixture.componentInstance;

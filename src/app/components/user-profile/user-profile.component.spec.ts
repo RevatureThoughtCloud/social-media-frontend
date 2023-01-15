@@ -1,17 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
 import { UserProfileComponent } from './user-profile.component';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { PostService } from 'src/app/services/post.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { of } from 'rxjs';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
+  let postService: PostService;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ UserProfileComponent ]
+  beforeEach(waitForAsync(() => {
+    postService = jasmine.createSpyObj('PostService', ['getPostsByAuthor']);
+    const route = jasmine.createSpyObj('ActivatedRoute', ['paramMap']);
+    route.paramMap = of({ get: () => 1 });
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule, RouterTestingModule],
+      declarations: [UserProfileComponent],
+      providers: [
+        { provide: PostService, useValue: postService },
+        { provide: ActivatedRoute, useValue: route }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
+  }));
+
+  beforeEach(() => {
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -20,4 +36,5 @@ describe('UserProfileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
