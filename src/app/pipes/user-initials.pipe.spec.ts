@@ -15,13 +15,13 @@ describe('UserInitialsPipe', () => {
   });
 
   // Test to ensure that the pipe correctly transforms the John's initials
-  it('transforms \'John Doe\' into initials \'JD\'', () => {
+  it(`transforms 'John Doe' into initials 'JD'`, () => {
     const user = new User(1, 'user@example.com', 'John', 'Doe', 'johndoe');
     expect(pipe.transform(user)).toEqual('JD');
   });
 
   // Test to ensure that the pipe correctly transforms the AJ's initials
-  it('transforms \'AJ Barea\' into initials \'AB\'', () => {
+  it(`transforms 'AJ Barea' into initials 'AB'`, () => {
     const user = new User(1, 'test@test.com', 'AJ', 'Barea', 'ajbarea');
     expect(pipe.transform(user)).toEqual('AB');
   });
