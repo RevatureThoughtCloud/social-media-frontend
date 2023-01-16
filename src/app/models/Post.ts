@@ -7,7 +7,7 @@ export default class Post {
   author: User;
   comments: Post[];
   postType: string;
-  likes: number;
+  likeCount: number;
 
   constructor(
     id: number,
@@ -16,7 +16,7 @@ export default class Post {
     author: User,
     comments: Post[],
     postType: string,
-    likes?: number
+    likeCount?: number
   ) {
     this.id = id;
     this.text = text;
@@ -24,6 +24,6 @@ export default class Post {
     this.author = author;
     this.comments = comments;
     this.postType = postType;
-    this.likes = likes? likes: 0;
+    this.likeCount = likeCount? likeCount: 0;
   }
 }
