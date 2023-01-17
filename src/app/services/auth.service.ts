@@ -1,3 +1,4 @@
+import { ContentObserver } from '@angular/cdk/observers';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -21,6 +22,7 @@ export class AuthService {
     this.auth$ = store.select('auth');
     this.auth$.subscribe((res) => {
       this.currentUser = res.user ?? new User(0, '', '', '', '');
+      console.log(res.user);
     });
   }
 
