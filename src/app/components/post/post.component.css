@@ -1,0 +1,14 @@
+.like-div {
+  margin-right: 1%;
+  display: flex;
+  font-size: 20px;
+  padding-top: 4px;
+}
+
+.fa-heart {
+  font-size: 20px;
+  margin-right: 5px;
+}
+.fa-solid {
+  color: red;  
+}
