@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Post from '../models/Post';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import Post from '../models/Post';
 export class PostService {
   postUrl: string = `${environment.baseUrl}/post`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private notiService: NotificationService) { }
 
   getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.postUrl}`, {
@@ -37,6 +38,8 @@ export class PostService {
     return this.http.put<Post>(`${this.postUrl}`, post, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
-    });
+    }).pipe(
+      tap(()=> this.notiService.getNotificationCount())
+    );
   }
 }
