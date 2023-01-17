@@ -1,13 +1,27 @@
 export default class User {
-    id: number
-    email: string
-    firstName: string
-    lastName: string
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  userName: string;
+  followersCount: number;
+  followingsCount: number;
 
-    constructor (id: number, email: string, firstName: string, lastName: string) {
-        this.id = id
-        this.email = email
-        this.firstName = firstName
-        this.lastName = lastName
-    }
+  constructor(
+    id: number,
+    email: string,
+    firstName: string,
+    lastName: string,
+    userName: string,
+    numOfFollowers: number = 0,
+    numOfFollowings: number = 0
+  ) {
+    this.id = id;
+    this.email = email;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.userName = userName;
+    this.followersCount = numOfFollowers;
+    this.followingsCount = numOfFollowings;
+  }
 }

@@ -1,7 +1,28 @@
-<p>
-    <mat-toolbar>
-        <span [routerLink]="['/post-feed']">ThoughtCloud</span>
-        <span class="spacer"></span>
-        <button mat-button (click)="logout();">Logout</button>
-    </mat-toolbar>
-</p>
+<div>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <span class="mx-4" [routerLink]="['/post-feed']">ThoughtCloud</span>
+      <button
+        mat-icon-button
+        color="accent"
+        aria-label="Example icon button with a menu icon"
+        (click)="toggleTheme()"
+      >
+        <mat-icon>invert_colors</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        color="accent"
+        aria-label="Example icon button with a menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="spacer"></span>
+
+      <button *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</button>
+      <button *ngIf="!isLoggedIn()" mat-button (click)="goToLogin()">
+        Login
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

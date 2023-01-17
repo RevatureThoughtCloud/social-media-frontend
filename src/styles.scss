@@ -1,4 +1,40 @@
 /* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+@import "@angular/material/theming";
+
+@include mat.core();
+
+$angular-primary: mat.define-palette(mat.$indigo-palette);
+$angular-accent: mat.define-palette(mat.$pink-palette);
+
+$angular-warn: mat.define-palette(mat.$red-palette);
+
+$angular-default-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $angular-primary,
+      accent: $angular-accent,
+      warn: $angular-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($angular-default-theme);
+
+$angular-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $angular-primary,
+      accent: $angular-accent,
+      warn: $angular-warn,
+    ),
+  )
+);
+
+.darkMode {
+  @include mat.all-component-colors($angular-dark-theme);
+}
 
 html,
 body {
@@ -8,16 +44,22 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   min-height: 100vh;
-  background: #e2e2e2;
 }
+
+.root {
+  min-height: 100vh;
+}
+
 .app-header {
   justify-content: space-between;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  height: 20px;
   z-index: 2;
-  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
 }
 .login-wrapper {
   height: 100%;
@@ -33,7 +75,6 @@ body {
   float: left;
   padding: 60px 50px 40px 50px;
   width: 100%;
-  background: #fff;
   border-radius: 10px;
   transform: scale(1);
   -webkit-transform: scale(1);
@@ -42,11 +83,11 @@ body {
   max-width: 330px;
 }
 .box.back {
-  transform: scale(.95);
-  -webkit-transform: scale(.95);
-  -ms-transform: scale(.95);
+  transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -ms-transform: scale(0.95);
   top: -20px;
-  opacity: .8;
+  opacity: 0.8;
   z-index: -1;
 }
 .box:before {
@@ -56,11 +97,10 @@ body {
   border-radius: 10px;
   position: absolute;
   top: -10px;
-  background: rgba(255, 255, 255, .6);
   left: 0;
-  transform: scale(.95);
-  -webkit-transform: scale(.95);
-  -ms-transform: scale(.95);
+  transform: scale(0.95);
+  -webkit-transform: scale(0.95);
+  -ms-transform: scale(0.95);
   z-index: -1;
 }
 .login-wrapper .example-form {
@@ -88,38 +128,37 @@ body {
 .login-wrapper .mat-stroked-button {
   border: 1px solid currentColor;
   line-height: 54px;
-  background: #FFF7FA;
 }
 .login-wrapper .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.8375em 0;
 }
 
 .login-rerout-link {
-    float: right;
-    padding-top: .5em;
+  float: right;
+  padding-top: 0.5em;
 }
 
 .login-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 4em;
+  display: flex;
+  justify-content: center;
+  margin-top: 4em;
 }
 
 .user-circle {
-  width:10em;
+  width: 10em;
   height: 10em;
   border-radius: 7em;
-      
+
   border: 1px solid #888080;
-     
+
   margin-bottom: 1em;
 
-  background-image: url('./assets/images/favicon.png');
+  background-image: url("./assets/images/favicon.png");
   background-size: cover;
 }
 
 .user-card {
-  width: 10em;
+  width: auto;
   text-align: center;
   margin: 1em;
 }
@@ -135,11 +174,11 @@ body {
 }
 
 .full-width {
-  width: 100%
+  width: 100%;
 }
 
 .header-image {
-  background-image: url('./assets/images/favicon.png');
+  background-image: url("./assets/images/favicon.png");
   background-size: cover;
 
   border: 1px solid #888080;

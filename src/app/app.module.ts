@@ -16,7 +16,9 @@ import { UserCardComponent } from './components/user-card/user-card.component';
 import { UserInitialsPipe } from './pipes/user-initials.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
-
+import { AppStoreModule } from './store/store.module';
+import { Store } from '@ngrx/store';
+import { GeneralEntityAppState } from './store/app.state';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,8 +39,11 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    AppStoreModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private store: Store<GeneralEntityAppState>) {}
+}
