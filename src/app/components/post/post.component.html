@@ -3,7 +3,7 @@
         <mat-card-header>
             <div mat-card-avatar class="header-image"></div>
             <mat-card-title>{{post.author.firstName}} {{post.author.lastName}}</mat-card-title>
-            <mat-card-subtitle>{{post.author.email}}</mat-card-subtitle>
+            <mat-card-subtitle>@{{post.author.userName}}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image *ngIf="post.imageUrl" src="{{ post.imageUrl }}" alt="Post Image">
         <mat-card-content>
