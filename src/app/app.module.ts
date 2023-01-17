@@ -19,6 +19,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AppStoreModule } from './store/store.module';
 import { Store } from '@ngrx/store';
 import { GeneralEntityAppState } from './store/app.state';
+import { NotificationListComponent } from './components/notification-list/notification-list.component';
+import { NotificationComponent } from './components/notification/notification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +33,8 @@ import { GeneralEntityAppState } from './store/app.state';
     NavbarComponent,
     UserInitialsPipe,
     UserProfileComponent,
+    NotificationListComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,
