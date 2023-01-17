@@ -65,7 +65,9 @@ export class PostService {
     return this.http.post<Like>(`${this.postUrl}/like`, like, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
-    });
+    }).pipe(
+      tap(()=> this.notiService.getNotificationCount())
+    );;
   }
 
   deleteLike(like: Like): Observable<boolean>{
