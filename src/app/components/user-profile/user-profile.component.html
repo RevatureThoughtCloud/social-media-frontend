@@ -1,20 +1,29 @@
 <div class="container">
+  <div>
+    <div class="user-circle"></div>
     <div>
-        <div class="user-circle"></div>
-        <div>
-            <h2>@{{user.userName}} <button mat-raised-button color="primary">Follow</button></h2>
-            <h3>{{user.firstName}} {{user.lastName}}</h3>
-            <p>I'm a talented coder and the first user of ThoughtCloud!</p>
-            <ul class="flex-menu">
-                <li><strong>{{postCount}}</strong> posts</li>
-                <li><strong>2</strong> followers</li>
-                <li><strong>5</strong> following</li>
-            </ul>
-        </div>
+      <h2>
+        @{{ user.userName }}
+        <button mat-raised-button color="primary">Follow</button>
+      </h2>
+      <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+      <p>I'm a talented coder and the first user of ThoughtCloud!</p>
+      <ul class="flex-menu">
+        <li>
+          <strong>{{ postCount }}</strong> posts
+        </li>
+        <li>
+          <strong>{{ user.followersCount }}</strong> followers
+        </li>
+        <li>
+          <strong>{{ user.followingsCount }}</strong> following
+        </li>
+      </ul>
     </div>
+  </div>
 </div>
 <div class="container">
-    <div id="post-feed" *ngFor="let post of posts">
-        <app-post [post]="post"></app-post>
-    </div>
+  <div id="post-feed" *ngFor="let post of posts">
+    <app-post [post]="post"></app-post>
+  </div>
 </div>
