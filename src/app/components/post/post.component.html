@@ -16,6 +16,13 @@
             </div>
         </mat-card-content>
         <mat-card-actions align="end">
+            <div class="like-div">
+                <i [ngClass]="userLikedPost? 'fa-solid fa-heart': 'fa-regular fa-heart'" 
+                (mouseenter)="likeEnter($event.target)" 
+                (mouseleave)="likeLeave($event.target)"
+                (click)="handleClick($event.target)"></i>
+                <p>{{post.likeCount}}</p>
+            </div>
             <button mat-raised-button color="primary" (click)="toggleReplyToPost()">Reply</button>
         </mat-card-actions>
         <form class="form" *ngIf="replyToPost" [formGroup]="commentForm" (ngSubmit)="submitReply($event)">

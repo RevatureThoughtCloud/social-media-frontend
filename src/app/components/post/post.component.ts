@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { subscribeOn } from 'rxjs';
+import LikeModel from 'src/app/models/Like';
+import Like from 'src/app/models/Like';
 import Post from 'src/app/models/Post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
@@ -16,13 +19,19 @@ export class PostComponent implements OnInit {
 
   @Input('post') post: Post;
   replyToPost: boolean = false;
+  userLikedPost: boolean = false;
 
   constructor(
     private postService: PostService,
     private authService: AuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.postService.likeExists(this.post, this.authService.currentUser).subscribe((response) =>{
+      this.userLikedPost = response;
+    })
+  }
+  
 
   toggleReplyToPost = () => {
     this.replyToPost = !this.replyToPost;
@@ -48,4 +57,55 @@ export class PostComponent implements OnInit {
         this.toggleReplyToPost();
       });
   };
+
+  updateLikes() {
+    this.postService.postById(this.post.id).subscribe( (response) => {
+      this.post.likeCount = response.likeCount;
+    });
+  }
+
+  handleClick(element: any) {
+    if (this.userLikedPost) {
+      this.unlikePost(element);
+    } else {
+      this.likePost(element);
+    }
+  }
+
+  likePost(element: any) {
+    let like = new Like(this.post, this.authService.currentUser);
+    this.postService.postLike(like).subscribe(() => {
+      this.updateLikes();
+      this.userLikedPost = true;
+      element.className = "fa-solid fa-heart-circle-check";
+    });
+    
+  }
+
+  unlikePost(element: any) {
+    let like = new Like(this.post, this.authService.currentUser);
+    this.postService.deleteLike(like).subscribe((response) => {
+      this.updateLikes();
+      this.userLikedPost = false;
+      element.className = "fa-regular fa-heart-crack";
+    });
+  }
+
+  likeEnter(element: any) {
+    if (element.classList.contains("fa-heart-circle-check") || element.classList.contains("fa-heart-crack")) {
+
+    } else if (!this.userLikedPost) {
+      element.className = "fa-solid fa-heart";
+    } else {
+      element.className = "fa-regular fa-heart";
+    }
+  }
+
+  likeLeave(element: any) {
+    if (element.classList.contains("fa-heart-circle-check") || this.userLikedPost) {
+      element.className = "fa-solid fa-heart";
+    } else {
+      element.className = "fa-regular fa-heart";
+    }
+  }
 }
