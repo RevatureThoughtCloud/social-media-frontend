@@ -35,6 +35,13 @@ export class PostService {
     });
   }
 
+  postById(postId: number): Observable<Post> {
+    return this.http.get<Post>(`${this.postUrl}/${postId}`,{
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    });
+  }
+
   likeExists(post: Post, user: User): Observable<boolean>{
     return this.http.get<boolean>(`${this.postUrl}/like/${post.id}/${user.id}`, {
       headers: environment.headers,

@@ -57,6 +57,13 @@ export class PostComponent implements OnInit {
         this.toggleReplyToPost();
       });
   };
+
+  updateLikes() {
+    this.postService.postById(this.post.id).subscribe( (response) => {
+      this.post.likeCount = response.likeCount;
+    });
+  }
+
   handleClick(element: any) {
     if (this.userLikedPost) {
       this.unlikePost(element);
@@ -64,30 +71,30 @@ export class PostComponent implements OnInit {
       this.likePost(element);
     }
   }
+
   likePost(element: any) {
     let like = new Like(this.post, this.authService.currentUser);
     this.postService.postLike(like).subscribe(() => {
-      //change to get likes from db
-      this.post.likeCount++;
+      this.updateLikes();
       this.userLikedPost = true;
       element.className = "fa-solid fa-heart-circle-check";
-    })
+    });
     
   }
 
   unlikePost(element: any) {
     let like = new Like(this.post, this.authService.currentUser);
     this.postService.deleteLike(like).subscribe((response) => {
-      if (response) {
-        this.post.likeCount--;
-        this.userLikedPost = false;
-        element.className = "fa-regular fa-heart-crack";
-      }
-    })
+      this.updateLikes();
+      this.userLikedPost = false;
+      element.className = "fa-regular fa-heart-crack";
+    });
   }
 
   likeEnter(element: any) {
-    if (!this.userLikedPost) {
+    if (element.classList.contains("fa-heart-circle-check") || element.classList.contains("fa-heart-crack")) {
+
+    } else if (!this.userLikedPost) {
       element.className = "fa-solid fa-heart";
     } else {
       element.className = "fa-regular fa-heart";
