@@ -1,7 +1,7 @@
 <div>
   <mat-toolbar>
     <mat-toolbar-row>
-      <a class="mx-4" routerLink="/post-feed">ThoughtCloud</a>
+      <span class="mx-4 logo" [routerLink]="['/post-feed']">ThoughtCloud</span>
       <button
         mat-icon-button
         color="accent"
@@ -12,11 +12,25 @@
       </button>
       <button
         mat-icon-button
+        [matMenuTriggerFor]="menu"
+        (menuOpened)="toggleNotes()"
+        (menuClosed)="toggleNotes()"
         color="accent"
         aria-label="Example icon button with a menu icon"
       >
-        <mat-icon>menu</mat-icon>
+        <mat-icon [matBadge]="count" [matBadgeHidden]="menuOpen || count == 0">menu</mat-icon>
       </button>
+      <mat-menu #menu="matMenu">
+        <a routerLink="/notifications" mat-menu-item>
+          Notifications<span
+            [matBadge]="count"
+            [matBadgeHidden]="count == 0"
+            matBadgeOverlap="false"
+            matBadgeSize="small"
+            matBadgeColor="warn"
+          ></span>
+        </a>
+      </mat-menu>
       <span class="spacer"></span>
 
       <button *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</button>

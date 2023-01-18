@@ -1,50 +1,39 @@
-import { HttpClient } from "@angular/common/http";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import Post from "src/app/models/Post";
-import User from "src/app/models/User";
-import { AuthService } from "src/app/services/auth.service";
-import { PostComponent } from "./post.component";
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideMockStore } from '@ngrx/store/testing';
+import { PostComponent } from './post.component';
+import { AuthService } from 'src/app/services/auth.service';
+import { PostService } from 'src/app/services/post.service';
+import Post from 'src/app/models/Post';
+import User from 'src/app/models/User';
 
 describe('PostComponent', () => {
   let component: PostComponent;
   let fixture: ComponentFixture<PostComponent>;
+  let postService: PostService;
   let authService: AuthService;
-  let httpClient: jasmine.SpyObj<HttpClient>;
+  let post: Post;
 
-  beforeEach(async () => {
-    httpClient = jasmine.createSpyObj<HttpClient>('HttpClient', ['get']);
-    authService = new AuthService(httpClient);
-    authService.currentUser = {
-      id: 1,
-      email: 'test@example.com',
-      firstName: 'Test',
-      lastName: 'User',
-      userName: 'testuser'
-    } as User;
-
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       declarations: [PostComponent],
-      providers: [{ provide: HttpClient, useValue: httpClient }, { provide: AuthService, useValue: authService }]
-    })
-      .compileComponents();
+      providers: [AuthService, PostService, provideMockStore({})]
+    }).compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(PostComponent);
     component = fixture.componentInstance;
-
-    component.post = new Post(
-      0,
-      'Test post text',
-      '',
-      authService.currentUser,
-      [],
-      'Comment'
-    )
-
-    fixture.detectChanges();
+    postService = TestBed.inject(PostService);
+    authService = TestBed.inject(AuthService);
+    const user = new User(1, 'test@email.com', 'firstName', 'lastName', 'test user', 0, 0);
+    post = new Post(1, "test post", "test content", user, [], "Post");
+    component.post = post;
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-});
+  })

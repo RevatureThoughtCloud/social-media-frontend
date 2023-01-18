@@ -1,4 +1,3 @@
-a {
-    color: inherit;
-    text-decoration: inherit;
+.logo {
+    cursor: pointer;
 }

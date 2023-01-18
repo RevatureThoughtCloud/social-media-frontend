@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,11 +9,30 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) { }
 
-  ngOnInit(): void { }
+  private _menuOpen:boolean = false;
+
+  constructor(private authService: AuthService, private notiService: NotificationService, private router: Router) { }
+
+  ngOnInit(): void { this.notiService.getNotificationCount(); }
 
   ngOnDestroy() { }
+
+  /* ****** notification menu stuff ****** */
+
+  get count(): number{
+    return this.notiService.count;
+  }
+
+  get menuOpen(){
+    return this._menuOpen;
+  }
+
+  toggleNotes():void {
+    this._menuOpen = !this._menuOpen;
+  }
+
+  /* ******************************** */
 
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
