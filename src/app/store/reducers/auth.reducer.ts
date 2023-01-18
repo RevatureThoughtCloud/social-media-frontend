@@ -5,6 +5,8 @@ import {
   LOGIN_SUCCESS,
   LoginFailed,
   SESSION_VERIFIED,
+  RESET_AUTH,
+  LOGOUT_SUCCESS,
   VERIFY_SESSION,
   LoginSuccess,
 } from '../actions/auth.actions';
@@ -65,6 +67,8 @@ export function authReducer(
         errorResponse: undefined,
         verifying: true,
       };
+    case LOGOUT_SUCCESS:
+      return defaultState;
     case SESSION_VERIFIED:
       return {
         ...state,
