@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { UserService } from './user.service';
 import User from '../models/User';
 
-fdescribe('UserService', () => {
+describe('UserService', () => {
   let service: UserService;
   let httpMock: HttpTestingController;
 
@@ -34,4 +34,16 @@ fdescribe('UserService', () => {
     expect(req.request.method).toBe('GET');
     req.flush(testUser);
   });
+
+  it('should handle invalid user ID', () => {
+    service.getUserById(-1).subscribe(
+      user => fail('Expected an error, but got user: ' + user),
+      error => expect(error.status).toEqual(404)
+    );
+  
+    const req = httpMock.expectOne(`${service.userUrl}/-1`);
+    expect(req.request.method).toBe('GET');
+    req.flush('User not found', { status: 404, statusText: 'Not Found' });
+  });
+  
 });
