@@ -21,6 +21,17 @@ import { Store } from '@ngrx/store';
 import { GeneralEntityAppState } from './store/app.state';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { FollowInfoComponent } from './components/follow-info/follow-info.component';
+
+import { DataViewModule } from 'primeng/dataview';
+import { ButtonModule } from 'primeng/button';
+import { PanelModule } from 'primeng/panel';
+import { DropdownModule } from 'primeng/dropdown';
+import { DialogModule } from 'primeng/dialog';
+import { InputTextModule } from 'primeng/inputtext';
+import { RatingModule } from 'primeng/rating';
+import { RippleModule } from 'primeng/ripple';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +46,7 @@ import { NotificationComponent } from './components/notification/notification.co
     UserProfileComponent,
     NotificationListComponent,
     NotificationComponent,
+    FollowInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +56,14 @@ import { NotificationComponent } from './components/notification/notification.co
     BrowserAnimationsModule,
     AngularMaterialModule,
     AppStoreModule,
+    DataViewModule,
+    ButtonModule,
+    PanelModule,
+    DropdownModule,
+    DialogModule,
+    InputTextModule,
+    RatingModule,
+    RippleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
