@@ -25,7 +25,7 @@
             userLikedPost ? 'fa-solid fa-heart' : 'fa-regular fa-heart'
           " (mouseenter)="likeEnter($event.target)" (mouseleave)="likeLeave($event.target)"
                     (click)="handleClick($event.target)"></i>
-                <p>{{ post.likeCount }}</p>
+                <p>{{ post.likeCount == 0? "":  post.likeCount}}</p>
             </div>
             <button mat-raised-button color="primary" (click)="toggleReplyToPost()">
                 Reply
