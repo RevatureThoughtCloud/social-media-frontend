@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { subscribeOn } from 'rxjs';
-import LikeModel from 'src/app/models/Like';
 import Like from 'src/app/models/Like';
 import Post from 'src/app/models/Post';
 import { AuthService } from 'src/app/services/auth.service';
@@ -32,7 +30,6 @@ export class PostComponent implements OnInit {
     })
   }
   
-
   toggleReplyToPost = () => {
     this.replyToPost = !this.replyToPost;
   };
