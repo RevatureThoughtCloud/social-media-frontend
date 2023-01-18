@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import User from '../models/User';
-import { LoginSuccess } from '../store/actions/auth.actions';
+import { LoginSuccess, LogoutSuccess } from '../store/actions/auth.actions';
 import { AuthState } from '../store/reducers/auth.reducer';
 
 @Injectable({
@@ -22,7 +22,6 @@ export class AuthService {
     this.auth$ = store.select('auth');
     this.auth$.subscribe((res) => {
       this.currentUser = res.user ?? new User(0, '', '', '', '');
-      console.log(res.user);
     });
   }
 
@@ -53,6 +52,7 @@ export class AuthService {
   logout(): void {
     this.http.post(`${this.authUrl}/logout`, null).subscribe();
     this.currentUser = new User(0, '', '', '', '');
+    this.store.dispatch(new LogoutSuccess());
   }
 
   register(
