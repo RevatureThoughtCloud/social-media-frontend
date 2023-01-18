@@ -19,6 +19,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { AppStoreModule } from './store/store.module';
 import { Store } from '@ngrx/store';
 import { GeneralEntityAppState } from './store/app.state';
+import { NotificationListComponent } from './components/notification-list/notification-list.component';
+import { NotificationComponent } from './components/notification/notification.component';
 import { FollowInfoComponent } from './components/follow-info/follow-info.component';
 
 import { DataViewModule } from 'primeng/dataview';
@@ -42,6 +44,8 @@ import { RippleModule } from 'primeng/ripple';
     NavbarComponent,
     UserInitialsPipe,
     UserProfileComponent,
+    NotificationListComponent,
+    NotificationComponent,
     FollowInfoComponent,
   ],
   imports: [

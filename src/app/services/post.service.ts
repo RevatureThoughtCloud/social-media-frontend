@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import Like from '../models/Like';
 import Post from '../models/Post';
+import { NotificationService } from './notification.service';
+import User from '../models/User';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +13,7 @@ import Post from '../models/Post';
 export class PostService {
   postUrl: string = `${environment.baseUrl}/post`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private notiService: NotificationService) { }
 
   getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.postUrl}`, {
@@ -37,6 +40,41 @@ export class PostService {
     return this.http.put<Post>(`${this.postUrl}`, post, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
+    }).pipe(
+      tap(()=> this.notiService.getNotificationCount())
+    );
+  }
+
+
+
+  postById(postId: number): Observable<Post> {
+    return this.http.get<Post>(`${this.postUrl}/${postId}`,{
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    });
+  }
+
+  likeExists(post: Post, user: User): Observable<boolean>{
+    return this.http.get<boolean>(`${this.postUrl}/like/${post.id}/${user.id}`, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    });
+  }
+
+  postLike(like: Like): Observable<Like>{
+    return this.http.post<Like>(`${this.postUrl}/like`, like, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    }).pipe(
+      tap(()=> this.notiService.getNotificationCount())
+    );;
+  }
+
+  deleteLike(like: Like): Observable<boolean>{
+    return this.http.delete<boolean>(`${this.postUrl}/like`, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+      body: like
     });
   }
 }
