@@ -1,4 +1,3 @@
-import { ContentObserver } from '@angular/cdk/observers';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';

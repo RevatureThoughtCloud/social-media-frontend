@@ -3,20 +3,27 @@
     <div class="user-circle"></div>
     <div>
       <h2>
-        @{{ user.userName }}
-        <button mat-raised-button color="primary">Follow</button>
+        @{{ profileOwner.userName }}
+        <follow-status-button
+          [target]="profileOwner"
+          (toggle)="onToggleFollowing($event)"
+        ></follow-status-button>
+
+        <button mat-raised-button color="primary" *ngIf="isCurrentUserProfile">
+          Edit Profile
+        </button>
       </h2>
-      <h3>{{ user.firstName }} {{ user.lastName }}</h3>
+      <h3>{{ profileOwner.firstName }} {{ profileOwner.lastName }}</h3>
       <p>I'm a talented coder and the first user of ThoughtCloud!</p>
       <ul class="flex-menu">
         <li>
           <strong>{{ postCount }}</strong> posts
         </li>
         <li>
-          <strong>{{ user.followersCount }}</strong> followers
+          <strong>{{ profileOwner.followersCount }}</strong> followers
         </li>
         <li>
-          <strong>{{ user.followingsCount }}</strong> following
+          <strong>{{ profileOwner.followingsCount }}</strong> following
         </li>
       </ul>
     </div>
