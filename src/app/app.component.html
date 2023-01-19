@@ -1,4 +1,4 @@
-<div id="root" class="mat-app-background root">
+<div id="root" [class]="(preferences$ | async)?.theme">
   <app-navbar></app-navbar>
   <router-outlet></router-outlet>
 </div>

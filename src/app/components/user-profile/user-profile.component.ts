@@ -54,5 +54,9 @@ export class UserProfileComponent implements OnInit {
   //Toggle Follow / Unfollow button
   onToggleFollowing(following: boolean) {
     this.profileOwner.followedByCurrentUser = following;
+
+    this.profileOwner.followersCount = following
+      ? ++this.profileOwner.followersCount
+      : --this.profileOwner.followersCount;
   }
 }

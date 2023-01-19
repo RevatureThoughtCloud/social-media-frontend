@@ -49,7 +49,9 @@ export class AuthService {
   }
 
   logout(): void {
-    this.http.post(`${this.authUrl}/logout`, null).subscribe();
+    //this.currentUser = new User(0, '', '', '', '');
+    // this.store.dispatch(new LogoutSuccess());
+    this.http.post(`${this.authUrl}/logout`, null);
     this.currentUser = new User(0, '', '', '', '');
     this.store.dispatch(new LogoutSuccess());
   }
