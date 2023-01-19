@@ -1,0 +1,10 @@
+<button
+  mat-raised-button
+  color="primary"
+  (click)="followAction()"
+  [disabled]="inProgress"
+>
+  {{
+    inProgress ? "..." : target.followedByCurrentUser ? "Following" : "Follow"
+  }}
+</button>

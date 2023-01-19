@@ -6,7 +6,7 @@ export default class User {
   userName: string;
   followersCount: number;
   followingsCount: number;
-
+  followedByCurrentUser: boolean;
   constructor(
     id: number,
     email: string,
@@ -14,7 +14,8 @@ export default class User {
     lastName: string,
     userName: string,
     numOfFollowers: number = 0,
-    numOfFollowings: number = 0
+    numOfFollowings: number = 0,
+    followedByCurrentUser: boolean = false
   ) {
     this.id = id;
     this.email = email;
@@ -23,5 +24,6 @@ export default class User {
     this.userName = userName;
     this.followersCount = numOfFollowers;
     this.followingsCount = numOfFollowings;
+    this.followedByCurrentUser = followedByCurrentUser;
   }
 }

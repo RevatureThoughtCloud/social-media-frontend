@@ -4,8 +4,14 @@
     <div>
       <h2>
         @{{ profileOwner.userName }}
-        <button mat-raised-button color="primary" *ngIf="!isCurrentUserProfile">Follow</button>
-        <button mat-raised-button color="primary" *ngIf="isCurrentUserProfile">Edit Profile</button>
+        <follow-status-button
+          [target]="profileOwner"
+          (toggle)="onToggleFollowing($event)"
+        ></follow-status-button>
+
+        <button mat-raised-button color="primary" *ngIf="isCurrentUserProfile">
+          Edit Profile
+        </button>
       </h2>
       <h3>{{ profileOwner.firstName }} {{ profileOwner.lastName }}</h3>
       <p>I'm a talented coder and the first user of ThoughtCloud!</p>
