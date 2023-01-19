@@ -31,6 +31,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { RatingModule } from 'primeng/rating';
 import { RippleModule } from 'primeng/ripple';
+import { FollowStatusComponent } from './components/follow-status/follow-status.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { RippleModule } from 'primeng/ripple';
     NotificationListComponent,
     NotificationComponent,
     FollowInfoComponent,
+    FollowStatusComponent,
   ],
   imports: [
     BrowserModule,
