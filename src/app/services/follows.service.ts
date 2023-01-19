@@ -20,10 +20,7 @@ export class FollowsService {
   baseUrl: string; //location of our Rest API
   headers: any;
 
-  constructor(
-    private http: HttpClient,
-    private store: Store<{ auth: AuthState }>
-  ) {
+  constructor(private http: HttpClient) {
     this.baseUrl = `${environment.baseUrl}`;
 
     this.headers = {
@@ -35,20 +32,28 @@ export class FollowsService {
   //a
   currentUserFollow(followUserName: string): Observable<any> {
     return this.http
-      .get<any>(this.baseUrl + '/user/follow/' + followUserName, {
-        headers: environment.headers,
-        withCredentials: environment.withCredentials,
-      })
+      .post<any>(
+        this.baseUrl + '/user/follow/' + followUserName,
+        {},
+        {
+          headers: environment.headers,
+          withCredentials: environment.withCredentials,
+        }
+      )
       .pipe(catchError((err) => this.handleError(err)));
   }
 
   //a
   currentUserUnFollow(unfollowUserName: string): Observable<any> {
     return this.http
-      .get<any>(this.baseUrl + '/user/unfollow/' + unfollowUserName, {
-        headers: environment.headers,
-        withCredentials: environment.withCredentials,
-      })
+      .delete<any>(
+        this.baseUrl + '/user/unfollow/' + unfollowUserName,
+
+        {
+          headers: environment.headers,
+          withCredentials: environment.withCredentials,
+        }
+      )
       .pipe(catchError((err) => this.handleError(err)));
   }
 

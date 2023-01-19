@@ -17,7 +17,7 @@ export class Follow implements Action {
 }
 export class UnFollow implements Action {
   constructor(public username: string) {}
-  type = FOLLOW;
+  type = UNFOLLOW;
 }
 
 export class FollowSuccess implements Action {

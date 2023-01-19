@@ -18,11 +18,13 @@ import {
   UnFollowSuccess,
   UnFollowFailed,
   UNFOLLOW,
+  UnFollow,
 } from '../actions/follows.actions';
 
 import { FollowReqOnlyAppState } from '../app.state';
 
 import { environment } from 'src/environments/environment';
+import { FollowsService } from 'src/app/services/follows.service';
 
 @Injectable()
 export class FollowEffect {
@@ -30,26 +32,18 @@ export class FollowEffect {
   constructor(
     private http: HttpClient,
     private actions$: Actions,
-    private store: Store<FollowReqOnlyAppState>
+    private store: Store<FollowReqOnlyAppState>,
+    private followsService: FollowsService
   ) {}
 
   followRequest$ = createEffect(() =>
     this.actions$.pipe(
       ofType<Follow>(FOLLOW),
       switchMap(({ username }) => {
-        const headers = {
-          headers: environment.headers,
-          withCredentials: environment.withCredentials,
-        };
-
-        return this.http
-          .post(this.baseUrl + '/user/follow/' + username, {
-            headers,
-          })
-          .pipe(
-            map((data) => new FollowSuccess('Follow successfull')),
-            catchError((err, caught) => [new FollowFailed(err)])
-          );
+        return this.followsService.currentUserFollow(username).pipe(
+          map((data) => new FollowSuccess('Follow successfull')),
+          catchError((err, caught) => [new FollowFailed(err)])
+        );
       })
     )
   );
@@ -69,6 +63,41 @@ export class FollowEffect {
     () =>
       this.actions$.pipe(
         ofType<FollowFailed>(FOLLOW_FAILED),
+        mergeMap((action) => {
+          return [];
+        })
+      ),
+    { dispatch: false }
+  );
+
+  unFollowRequest$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType<UnFollow>(UNFOLLOW),
+      switchMap(({ username }) => {
+        console.log('inhere');
+        return this.followsService.currentUserUnFollow(username).pipe(
+          map((data) => new UnFollowSuccess('UNFollow successfull')),
+          catchError((err, caught) => [new UnFollowFailed(err)])
+        );
+      })
+    )
+  );
+
+  unFollowSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<UnFollowSuccess>(UNFOLLOW_SUCCESS),
+        mergeMap((action) => {
+          return [];
+        })
+      ),
+    { dispatch: false }
+  );
+
+  unFollowFailed$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<UnFollowFailed>(UNFOLLOW_FAILED),
         mergeMap((action) => {
           return [];
         })
