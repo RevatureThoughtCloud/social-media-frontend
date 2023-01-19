@@ -56,6 +56,7 @@ describe('NotificationService', () => {
           userName: 'bobloblaw',
           followersCount: 0,
           followingsCount: 0,
+          followedByCurrentUser: false
         },
         sender: {
           id: 1,
@@ -65,6 +66,7 @@ describe('NotificationService', () => {
           userName: 'bobloblaw',
           followersCount: 0,
           followingsCount: 0,
+          followedByCurrentUser: false
         },
         post: {
           id: 1,
@@ -78,6 +80,7 @@ describe('NotificationService', () => {
             userName: 'bobloblaw',
             followersCount: 0,
             followingsCount: 0,
+            followedByCurrentUser: false
           },
           comments: [],
           postType: 'Comment',
@@ -118,6 +121,7 @@ describe('NotificationService', () => {
         userName: 'bobloblaw',
         followersCount: 0,
         followingsCount: 0,
+        followedByCurrentUser: false
       },
       sender: {
         id: 1,
@@ -127,6 +131,7 @@ describe('NotificationService', () => {
         userName: 'bobloblaw',
         followersCount: 0,
         followingsCount: 0,
+        followedByCurrentUser: false
       },
       post: {
         id: 1,
@@ -140,6 +145,7 @@ describe('NotificationService', () => {
           userName: 'bobloblaw',
           followersCount: 0,
           followingsCount: 0,
+          followedByCurrentUser: false
         },
         comments: [],
         postType: 'Comment',
@@ -175,6 +181,7 @@ describe('NotificationService', () => {
         userName: 'bobloblaw',
         followersCount: 0,
         followingsCount: 0,
+        followedByCurrentUser: false
       },
       sender: {
         id: 1,
@@ -184,6 +191,7 @@ describe('NotificationService', () => {
         userName: 'bobloblaw',
         followersCount: 0,
         followingsCount: 0,
+        followedByCurrentUser: false
       },
       post: {
         id: 1,
@@ -197,6 +205,7 @@ describe('NotificationService', () => {
           userName: 'bobloblaw',
           followersCount: 0,
           followingsCount: 0,
+          followedByCurrentUser: false
         },
         comments: [],
         postType: 'Comment',
