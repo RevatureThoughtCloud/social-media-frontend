@@ -16,6 +16,7 @@ export class PostComponent implements OnInit {
   });
 
   @Input('post') post: Post;
+  replies: number;
   replyToPost: boolean = false;
   userLikedPost: boolean = false;
 
@@ -25,6 +26,7 @@ export class PostComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.replies = this.post.comments.length;
     this.postService.likeExists(this.post, this.authService.currentUser).subscribe((response) =>{
       this.userLikedPost = response;
     })
@@ -51,6 +53,7 @@ export class PostComponent implements OnInit {
       })
       .subscribe((response) => {
         this.post = response;
+        this.replies = response.comments.length;
         this.toggleReplyToPost();
       });
   };
