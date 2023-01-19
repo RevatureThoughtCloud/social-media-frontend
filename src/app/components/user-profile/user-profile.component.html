@@ -4,11 +4,8 @@
     <div>
       <h2>
         @{{ profileOwner.userName }}
-        <follow-status-button
-          [target]="profileOwner"
-          (toggle)="onToggleFollowing($event)"
-        ></follow-status-button>
-
+        <follow-status-button [target]="profileOwner" (toggle)="onToggleFollowing($event)"
+          *ngIf="!isCurrentUserProfile"></follow-status-button>
         <button mat-raised-button color="primary" *ngIf="isCurrentUserProfile">
           Edit Profile
         </button>
