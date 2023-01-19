@@ -68,7 +68,7 @@ export class AuthService {
       lastName: lastName,
       email: email,
       password: password,
-      username: userName,
+      userName: userName,
     };
     return this.http.post<any>(`${this.authUrl}/register`, payload, {
       headers: environment.headers,
