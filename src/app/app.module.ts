@@ -32,7 +32,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { RatingModule } from 'primeng/rating';
 import { RippleModule } from 'primeng/ripple';
 import { FollowStatusComponent } from './components/follow-status/follow-status.component';
-
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +66,9 @@ import { FollowStatusComponent } from './components/follow-status/follow-status.
     InputTextModule,
     RatingModule,
     RippleModule,
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -5,17 +5,19 @@ import { localStorageSync } from 'ngrx-store-localstorage';
 
 import { authReducer } from './reducers/auth.reducer';
 import { followReducer } from './reducers/follows.reducer';
+import { preferencesReducer } from './reducers/user-preferences.reducers';
 
 export const appReducers = {
   auth: authReducer,
   follow: followReducer,
+  preferences: preferencesReducer,
 } as ActionReducerMap<{}>;
 
 export function localStorageSyncReducer(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return localStorageSync({
-    keys: ['auth'],
+    keys: ['auth', 'preferences'],
     rehydrate: true,
   })(reducer);
 }

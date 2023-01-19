@@ -10,7 +10,6 @@ import {
   VERIFY_SESSION,
   LoginSuccess,
 } from '../actions/auth.actions';
-import { AuthOnlyAppState } from '../app.state';
 
 export interface AuthState {
   loggedIn: boolean;
@@ -36,7 +35,6 @@ export function authReducer(
   state: AuthState = defaultState,
   action: any
 ): AuthState {
-  console.log(state);
   switch (action.type) {
     case LOGIN:
       return { ...state, loggingIn: true, loggedIn: false, error: false };

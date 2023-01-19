@@ -14,8 +14,8 @@ import {
   UnFollowFailed,
   UNFOLLOW,
   UnFollow,
+  RESET_FOLLOW,
 } from '../actions/follows.actions';
-import { AuthOnlyAppState } from '../app.state';
 
 export interface FollowReqState {
   followersUserName: string;
@@ -101,7 +101,8 @@ export function followReducer(
         completed: true,
         errorResponse: 'Failed UNfollowed' + state.followingsUserName,
       };
-
+    case RESET_FOLLOW:
+      return defaultState;
     default:
       return state;
   }

@@ -18,7 +18,9 @@
         color="accent"
         aria-label="Example icon button with a menu icon"
       >
-        <mat-icon [matBadge]="count" [matBadgeHidden]="menuOpen || count == 0">menu</mat-icon>
+        <mat-icon [matBadge]="count" [matBadgeHidden]="menuOpen || count == 0"
+          >menu</mat-icon
+        >
       </button>
       <mat-menu #menu="matMenu">
         <a routerLink="/notifications" mat-menu-item>
