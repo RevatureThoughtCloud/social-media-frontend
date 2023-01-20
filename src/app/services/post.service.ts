@@ -16,7 +16,8 @@ export class PostService {
   constructor(
     private http: HttpClient,
     private notiService: NotificationService
-  ) { }
+  ) {}
+
 
   getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.postUrl}`, {
@@ -54,6 +55,18 @@ export class PostService {
       withCredentials: environment.withCredentials,
     });
   }
+
+
+  deletePost(postId: number): Observable<void> {
+    return this.http.delete<void>(`${this.postUrl}/${postId}`, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    }).pipe(
+      tap(() => this.notiService.getNotificationCount())
+    );
+  }
+
+  //likes
 
   likeExists(post: Post, user: User): Observable<boolean> {
     return this.http.get<boolean>(
