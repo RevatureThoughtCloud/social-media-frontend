@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import Like from 'src/app/models/Like';
 import Post from 'src/app/models/Post';
@@ -15,10 +15,15 @@ export class PostComponent implements OnInit {
     text: new FormControl(''),
   });
 
+  editForm: FormGroup;
+
+  @Output() handleDeletePost = new EventEmitter();
+
   @Input('post') post: Post;
   replies: number;
   replyToPost: boolean = false;
   userLikedPost: boolean = false;
+  editPost: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -27,11 +32,17 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.replies = this.post.comments.length;
-    this.postService.likeExists(this.post, this.authService.currentUser).subscribe((response) =>{
-      this.userLikedPost = response;
-    })
+    this.postService
+      .likeExists(this.post, this.authService.currentUser)
+      .subscribe((response) => {
+        this.userLikedPost = response;
+      });
   }
-  
+
+  get currentUser(){
+    return this.authService.currentUser;
+  }
+
   toggleReplyToPost = () => {
     this.replyToPost = !this.replyToPost;
   };
@@ -58,8 +69,54 @@ export class PostComponent implements OnInit {
       });
   };
 
+  /*************** DELETE  POSTS    **********/
+  handleDelete() {
+    this.handleDeletePost.emit(this.post.id);
+  }
+
+  handleCommentDelete(commentId: number) {
+    if (confirm('Are you sure that you want to delete this post?')) {
+      this.post.comments = this.post.comments.filter(
+        (comment) => comment.id != commentId
+      );
+      this.postService
+        .upsertPost({ ...this.post, comments: [...this.post.comments] })
+        .subscribe((response) => {
+          this.post = response;
+          this.replies = response.comments.length;
+        });
+    }
+  }
+
+  /* ********************************** */
+  /* ******************** Modify Posts **********************/
+
+  toggleEdit(){
+    this.editForm = new FormGroup({
+      text: new FormControl(this.post.text),
+    });
+    this.editPost = !this.editPost;
+  }
+  handleEdit(){
+    this.post.text = this.editForm.value.text;
+    
+
+    this.postService.upsertPost(this.post).subscribe((comment) => {
+      
+      this.post = comment;
+
+      this.editPost = !this.editPost;
+    });
+  }
+
+
+
+  /* ***************************************************** */
+
+  //
+
   updateLikes() {
-    this.postService.postById(this.post.id).subscribe( (response) => {
+    this.postService.postById(this.post.id).subscribe((response) => {
       this.post.likeCount = response.likeCount;
     });
   }
@@ -77,9 +134,8 @@ export class PostComponent implements OnInit {
     this.postService.postLike(like).subscribe(() => {
       this.updateLikes();
       this.userLikedPost = true;
-      element.className = "fa-solid fa-heart-circle-check";
+      element.className = 'fa-solid fa-heart-circle-check';
     });
-    
   }
 
   unlikePost(element: any) {
@@ -87,25 +143,30 @@ export class PostComponent implements OnInit {
     this.postService.deleteLike(like).subscribe((response) => {
       this.updateLikes();
       this.userLikedPost = false;
-      element.className = "fa-regular fa-heart-crack";
+      element.className = 'fa-regular fa-heart-crack';
     });
   }
 
   likeEnter(element: any) {
-    if (element.classList.contains("fa-heart-circle-check") || element.classList.contains("fa-heart-crack")) {
-
+    if (
+      element.classList.contains('fa-heart-circle-check') ||
+      element.classList.contains('fa-heart-crack')
+    ) {
     } else if (!this.userLikedPost) {
-      element.className = "fa-solid fa-heart";
+      element.className = 'fa-solid fa-heart';
     } else {
-      element.className = "fa-regular fa-heart";
+      element.className = 'fa-regular fa-heart';
     }
   }
 
   likeLeave(element: any) {
-    if (element.classList.contains("fa-heart-circle-check") || this.userLikedPost) {
-      element.className = "fa-solid fa-heart";
+    if (
+      element.classList.contains('fa-heart-circle-check') ||
+      this.userLikedPost
+    ) {
+      element.className = 'fa-solid fa-heart';
     } else {
-      element.className = "fa-regular fa-heart";
+      element.className = 'fa-regular fa-heart';
     }
   }
 }

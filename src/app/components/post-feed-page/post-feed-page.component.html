@@ -29,6 +29,6 @@
     </ng-template>
 
     <div id="post-feed" *ngFor="let post of posts">
-        <app-post [post]="post"></app-post>
+        <app-post (handleDeletePost)="deletePost($event)"  [post]="post"></app-post>
     </div>
 </div>

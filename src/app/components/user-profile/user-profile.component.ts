@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import Post from "src/app/models/Post";
-import User from "src/app/models/User";
-import { AuthService } from "src/app/services/auth.service";
-import { PostService } from "src/app/services/post.service";
-import { UserService } from "src/app/services/user.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import Post from 'src/app/models/Post';
+import User from 'src/app/models/User';
+import { AuthService } from 'src/app/services/auth.service';
+import { PostService } from 'src/app/services/post.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.user = this.authService.currentUser;
@@ -37,14 +37,24 @@ export class UserProfileComponent implements OnInit {
           this.postCount = this.posts.length;
           this.isCurrentUserProfile = this.user.id === this.profileId;
           if (!this.isCurrentUserProfile) {
-            this.userService.getUserById(this.profileId).subscribe((profileAuthor) => {
-              this.profileOwner = profileAuthor;
-            });
+            this.userService
+              .getUserById(this.profileId)
+              .subscribe((profileAuthor) => {
+                this.profileOwner = profileAuthor;
+              });
           } else {
             this.profileOwner = this.user;
           }
         });
     });
+  }
+
+  deletePost(postId: number) {
+    if (confirm('Are you sure that you want to delete this post?')) {
+      this.postService.deletePost(postId).subscribe(() => {
+        this.posts = this.posts.filter((post) => post.id != postId);
+      });
+    }
   }
 
   //Toggle Follow / Unfollow button
