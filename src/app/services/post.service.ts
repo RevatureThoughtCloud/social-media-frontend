@@ -18,6 +18,7 @@ export class PostService {
     private notiService: NotificationService
   ) {}
 
+
   getAllPosts(): Observable<Post[]> {
     return this.http.get<Post[]>(`${this.postUrl}`, {
       headers: environment.headers,
@@ -55,6 +56,7 @@ export class PostService {
     });
   }
 
+
   deletePost(postId: number): Observable<void> {
     return this.http.delete<void>(`${this.postUrl}/${postId}`, {
       headers: environment.headers,
@@ -77,7 +79,6 @@ export class PostService {
   }
 
   postLike(like: Like): Observable<Like> {
-
     return this.http
       .post<Like>(`${this.postUrl}/like`, like, {
         headers: environment.headers,
