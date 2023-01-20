@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ChangeTheme } from 'src/app/store/actions/user-preferences.actions';
+import { PreferencesState } from 'src/app/store/reducers/user-preferences.reducers';
 
 @Component({
   selector: 'app-navbar',
@@ -9,26 +13,34 @@ import { NotificationService } from 'src/app/services/notification.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+  private _menuOpen: boolean = false;
+  public preferences$: Observable<PreferencesState>;
+  constructor(
+    private authService: AuthService,
+    private notiService: NotificationService,
+    private router: Router,
+    private store: Store<{ preferences: PreferencesState }>
+  ) {
+    this.preferences$ = store.select('preferences');
+  }
 
-  private _menuOpen:boolean = false;
+  ngOnInit(): void {
+    this.notiService.getNotificationCount();
+  }
 
-  constructor(private authService: AuthService, private notiService: NotificationService, private router: Router) { }
-
-  ngOnInit(): void { this.notiService.getNotificationCount(); }
-
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 
   /* ****** notification menu stuff ****** */
 
-  get count(): number{
+  get count(): number {
     return this.notiService.count;
   }
 
-  get menuOpen(){
+  get menuOpen() {
     return this._menuOpen;
   }
 
-  toggleNotes():void {
+  toggleNotes(): void {
     this._menuOpen = !this._menuOpen;
   }
 
@@ -48,17 +60,6 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleTheme() {
-    if (
-      document.getElementById('root')?.getAttribute('class') ===
-      'darkMode mat-app-background root'
-    ) {
-      document
-        .getElementById('root')
-        ?.setAttribute('class', 'mat-app-background root');
-    } else {
-      document
-        .getElementById('root')
-        ?.setAttribute('class', 'darkMode mat-app-background root');
-    }
+    this.store.dispatch(new ChangeTheme(''));
   }
 }

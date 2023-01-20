@@ -74,7 +74,6 @@ export class FollowEffect {
     this.actions$.pipe(
       ofType<UnFollow>(UNFOLLOW),
       switchMap(({ username }) => {
-        console.log('inhere');
         return this.followsService.currentUserUnFollow(username).pipe(
           map((data) => new UnFollowSuccess('UNFollow successfull')),
           catchError((err, caught) => [new UnFollowFailed(err)])

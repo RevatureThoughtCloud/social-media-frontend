@@ -6,19 +6,24 @@
     <form class="form" [formGroup]="registerForm" (ngSubmit)="onSubmit($event)">
       <mat-card-content>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Email" formControlName="email">
+          <input matInput placeholder="Username" formControlName="userName" />
         </mat-form-field>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Password" type="password" formControlName="password">
+          <input matInput placeholder="Email" formControlName="email" />
         </mat-form-field>
         <mat-form-field class="full-width">
-          <input matInput placeholder="First Name" formControlName="firstName">
+          <input matInput placeholder="Password" type="password" formControlName="password" />
         </mat-form-field>
         <mat-form-field class="full-width">
-          <input matInput placeholder="Last Name" formControlName="lastName">
+          <input matInput placeholder="First Name" formControlName="firstName" />
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Last Name" formControlName="lastName" />
         </mat-form-field>
       </mat-card-content>
-      <button mat-stroked-button color="accent" class="btn-block" type="submit">Register</button>
+      <button mat-stroked-button color="accent" class="btn-block" type="submit">
+        Register
+      </button>
     </form>
     <a class="login-rerout-link" [routerLink]="['/login']">Already have an account?</a>
   </mat-card>

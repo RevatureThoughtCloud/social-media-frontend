@@ -1,9 +1,37 @@
+<div class="entire-comment">
+<div class="comment-head">
+    <div mat-card-avatar class="header-image">
+        <a [routerLink]="['/profile/', inputComment.author.id]">
+            <div mat-card-avatar></div>
+        </a>
+    </div>
+    <div class="comment-info">
+        <p class="comment-fullname">{{inputComment.author.firstName}} {{inputComment.author.lastName}} </p>
+        <p class="comment-username mat-card-subtitle">
+            <a [routerLink]="['/profile/', inputComment.author.id]">@{{inputComment.author.userName}}</a>
+        </p>
+    </div>
+    
+</div>
 <p>
     {{inputComment.text}}
 </p>
 <div class="comment-reply" align="right">
-    <div class="comment-reply-text" (click)="toggleReplyToComment()">
-        reply
+    <div class="comment-actions">
+        <div class="icon-div">
+            <i class="fa-regular fa-comment"></i>
+            <p>{{replies}}</p>
+        </div>
+        <div class="icon-div">
+            <i [ngClass]="
+        userLikedPost ? 'fa-solid fa-heart' : 'fa-regular fa-heart'
+      " (mouseenter)="likeEnter($event.target)" (mouseleave)="likeLeave($event.target)"
+                (click)="handleClick($event.target)"></i>
+            <p>{{ inputComment.likeCount == 0? "":  inputComment.likeCount}}</p>
+        </div>
+        <button mat-raised-button color="primary" *ngIf="!replyToComment" (click)="toggleReplyToComment()">
+            Reply
+        </button>
     </div>
     <form class="form" *ngIf="replyToComment" [formGroup]="commentForm" (ngSubmit)="submitReply($event)">
         <mat-form-field class="full-width" appearance="fill">
@@ -17,6 +45,6 @@
     </form>
 </div>
 <div *ngFor="let comment of inputComment.comments" class="comment-container">
-    <mat-divider></mat-divider>
     <app-comment [comment]="comment"></app-comment>
+</div>
 </div>

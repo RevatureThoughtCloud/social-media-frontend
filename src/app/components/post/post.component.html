@@ -11,21 +11,22 @@
         </mat-card-header>
         <img mat-card-image *ngIf="post.imageUrl" src="{{ post.imageUrl }}" alt="Post Image" />
         <mat-card-content>
-            <p>
+            <div>
                 {{ post.text }}
-            </p>
-            <div *ngFor="let comment of post.comments" class="comment-container">
-                <mat-divider></mat-divider>
-                <app-comment [comment]="comment"></app-comment>
             </div>
+            
         </mat-card-content>
         <mat-card-actions align="end">
-            <div class="like-div">
+            <div class="icon-div">
+                <i class="fa-regular fa-comment"></i>
+                <p>{{replies}}</p>
+            </div>
+            <div class="icon-div">
                 <i [ngClass]="
             userLikedPost ? 'fa-solid fa-heart' : 'fa-regular fa-heart'
           " (mouseenter)="likeEnter($event.target)" (mouseleave)="likeLeave($event.target)"
                     (click)="handleClick($event.target)"></i>
-                <p>{{ post.likeCount }}</p>
+                <p>{{ post.likeCount == 0? "":  post.likeCount}}</p>
             </div>
             <button mat-raised-button color="primary" (click)="toggleReplyToPost()">
                 Reply
@@ -43,5 +44,10 @@
                 <button mat-raised-button color="primary" type="submit">Post</button>
             </div>
         </form>
+        <mat-card-footer>
+            <div *ngFor="let comment of post.comments" class="comment-container">
+                <app-comment [comment]="comment"></app-comment>
+            </div>
+        </mat-card-footer>
     </mat-card>
 </div>
