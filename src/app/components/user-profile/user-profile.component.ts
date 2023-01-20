@@ -13,13 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
-  updateProfileForm = new FormGroup({
-    userName: new FormControl(''),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    aboutMe: new FormControl(''),
-  });
-
+  updateProfileForm: FormGroup;
   profileId: number;
   currentUser: User = {} as User;
   posts: Post[] = [];
@@ -33,10 +27,15 @@ export class UserProfileComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
+    this.userService
+      .getUserById(this.authService.currentUser.id)
+      .subscribe((currentUser) => {
+        this.currentUser = currentUser;
+      });
     this.activatedRoute.paramMap.subscribe((params) => {
       this.profileId = Number(params.get('id'));
       this.postService
@@ -45,7 +44,6 @@ export class UserProfileComponent implements OnInit {
           this.posts = response;
           this.postCount = this.posts.length;
           this.isCurrentUserProfile = this.currentUser.id === this.profileId;
-
           if (!this.isCurrentUserProfile) {
             this.userService
               .getUserById(this.profileId)
@@ -60,6 +58,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   toggleEditMode() {
+    this.updateProfileForm = new FormGroup({
+      userName: new FormControl(this.profileOwner.userName),
+      firstName: new FormControl(this.profileOwner.firstName),
+      lastName: new FormControl(this.profileOwner.lastName),
+      aboutMe: new FormControl(this.profileOwner.aboutMe),
+    });
     this.isEditing = !this.isEditing;
   }
 
@@ -70,12 +74,12 @@ export class UserProfileComponent implements OnInit {
         new User(
           this.profileOwner.id,
           this.profileOwner.email,
-          this.updateProfileForm.value.firstName || '',
-          this.updateProfileForm.value.lastName || '',
-          this.updateProfileForm.value.userName || '',
+          this.updateProfileForm.value.firstName || this.profileOwner.firstName,
+          this.updateProfileForm.value.lastName || this.profileOwner.lastName,
+          this.updateProfileForm.value.userName || this.profileOwner.userName,
           this.profileOwner.followersCount,
           this.profileOwner.followingsCount,
-          this.updateProfileForm.value.aboutMe || '',
+          this.updateProfileForm.value.aboutMe || this.profileOwner.aboutMe,
           this.profileOwner.followedByCurrentUser
         )
       )
@@ -83,7 +87,7 @@ export class UserProfileComponent implements OnInit {
         this.profileOwner = res;
         this.toggleEditMode();
       });
-};
+  };
 
   //Toggle Follow / Unfollow button
   onToggleFollowing(following: boolean) {
