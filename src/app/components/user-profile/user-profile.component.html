@@ -2,16 +2,46 @@
   <div>
     <div class="user-circle"></div>
     <div>
-      <h2>
-        @{{ profileOwner.userName }}
-        <follow-status-button [target]="profileOwner" (toggle)="onToggleFollowing($event)"
-          *ngIf="!isCurrentUserProfile"></follow-status-button>
-        <button mat-raised-button color="primary" *ngIf="isCurrentUserProfile">
-          Edit Profile
-        </button>
-      </h2>
-      <h3>{{ profileOwner.firstName }} {{ profileOwner.lastName }}</h3>
-      <h4>{{ profileOwner.aboutMe }}</h4>
+      <div class="profile-owner-details" *ngIf="!isEditing; else editProfileForm">
+        <h2>
+          @{{ profileOwner.userName }}
+          <follow-status-button [target]="profileOwner" (toggle)="onToggleFollowing($event)"
+            *ngIf="!isCurrentUserProfile"></follow-status-button>
+          <button mat-raised-button color="primary" *ngIf="isCurrentUserProfile" (click)="toggleEditMode()">
+            Edit Profile
+          </button>
+        </h2>
+        <h3>{{ profileOwner.firstName }} {{ profileOwner.lastName }}</h3>
+        <h4>{{ profileOwner.aboutMe }}</h4>
+      </div>
+      <ng-template #editProfileForm>
+        <form class="profile-update-form" [formGroup]="updateProfileForm">
+          <mat-form-field class="partial-width" appearance="outline">
+            <mat-label>Username</mat-label>
+            <textarea matInput [(ngModel)]="profileOwner.userName" autofocus formControlName="userName"></textarea>
+          </mat-form-field>
+          <mat-form-field class="partial-width" appearance="outline">
+            <mat-label>First Name</mat-label>
+            <textarea matInput [(ngModel)]="profileOwner.firstName" autofocus formControlName="firstName"></textarea>
+          </mat-form-field>
+          <mat-form-field class="partial-width" appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <textarea matInput [(ngModel)]="profileOwner.lastName" autofocus formControlName="lastName"></textarea>
+          </mat-form-field>
+          <mat-form-field class="partial-width" appearance="outline">
+            <mat-label>About Me</mat-label>
+            <textarea matInput [(ngModel)]="profileOwner.aboutMe" autofocus formControlName="aboutMe"></textarea>
+          </mat-form-field>
+          <div class="partial-width" align="right">
+            <button mat-raised-button color="warn" (click)="toggleEditMode()">
+              Cancel
+            </button>
+            <button mat-raised-button color="primary" (click)="updateProfile($event)">
+              Update
+            </button>
+          </div>
+        </form>
+      </ng-template>
       <ul class="flex-menu">
         <li>
           <strong>{{ postCount }}</strong> posts

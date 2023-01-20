@@ -5,7 +5,7 @@ import User from '../models/User';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   userUrl: string = `${environment.baseUrl}/user`;
@@ -13,9 +13,16 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.userUrl}/${id}`, { 
-      headers: environment.headers, 
-      withCredentials: environment.withCredentials, 
+    return this.http.get<User>(`${this.userUrl}/${id}`, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
     });
-  }}
-    
+  }
+
+  updateUser(user: User): Observable<User> {
+    return this.http.put<User>(`${this.userUrl}/${user.id}`, user, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    });
+  }
+}
