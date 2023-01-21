@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FollowInfoComponent } from './follow-info.component';
+import { SearchBarUserComponent } from './search-bar-user.component';
 
-describe('FollowInfoComponent', () => {
-  let component: FollowInfoComponent;
-  let fixture: ComponentFixture<FollowInfoComponent>;
+describe('SearchBarUserComponent', () => {
+  let component: SearchBarUserComponent;
+  let fixture: ComponentFixture<SearchBarUserComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FollowInfoComponent ]
+      declarations: [ SearchBarUserComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(FollowInfoComponent);
+    fixture = TestBed.createComponent(SearchBarUserComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

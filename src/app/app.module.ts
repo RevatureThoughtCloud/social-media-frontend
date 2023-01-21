@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +21,6 @@ import { Store } from '@ngrx/store';
 import { GeneralEntityAppState } from './store/app.state';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { NotificationComponent } from './components/notification/notification.component';
-import { FollowInfoComponent } from './components/follow-info/follow-info.component';
 
 import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
@@ -35,6 +34,8 @@ import { FollowStatusComponent } from './components/follow-status/follow-status.
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { SidenavWrapperComponent } from './components/sidenav-wrapper/sidenav-wrapper.component';
 import { UserInfoPopoverComponent } from './components/user-info-popover/user-info-popover.component';
+import { SearchBarUserComponent } from './components/search-bar-user/search-bar-user.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,13 +50,15 @@ import { UserInfoPopoverComponent } from './components/user-info-popover/user-in
     UserProfileComponent,
     NotificationListComponent,
     NotificationComponent,
-    FollowInfoComponent,
+
     FollowStatusComponent,
     SidenavWrapperComponent,
     UserInfoPopoverComponent,
+    SearchBarUserComponent,
   ],
   imports: [
     BrowserModule,
+    MatAutocompleteModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -68,6 +71,7 @@ import { UserInfoPopoverComponent } from './components/user-info-popover/user-in
     DropdownModule,
     DialogModule,
     InputTextModule,
+    FormsModule,
     RatingModule,
     RippleModule,
     StoreDevtoolsModule.instrument({

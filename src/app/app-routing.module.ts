@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FollowInfoComponent } from './components/follow-info/follow-info.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { PostFeedPageComponent } from './components/post-feed-page/post-feed-page.component';
@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'post-feed', component: PostFeedPageComponent },
   { path: 'profile/:id', component: UserProfileComponent },
-  { path: 'viewfollowers', component: FollowInfoComponent },
+
   { path: 'notifications', component: NotificationListComponent },
   //until 404 component is made, redirect to post-feed if nonexistent route
   { path: '**', redirectTo: '/post-feed', pathMatch: 'full' },
