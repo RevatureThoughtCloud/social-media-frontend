@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import User from 'src/app/models/User';
-import { AuthService } from 'src/app/services/auth.service';
-import { Logout } from 'src/app/store/actions/auth.actions';
-import { AuthOnlyState } from 'src/app/store/app.state';
 import { Logout2 } from 'src/app/store/reducer.module';
 import { AuthState } from 'src/app/store/reducers/auth.reducer';
 
