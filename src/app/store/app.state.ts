@@ -1,11 +1,15 @@
 import { AuthState } from './reducers/auth.reducer';
 import { FollowReqState } from './reducers/follows.reducer';
+import { UserDataReqState } from './reducers/user-data.reduces';
+import { PreferencesState } from './reducers/user-preferences.reducers';
 
 //add additional states for different data you want to be
 //persisted to local storage
 export abstract class AppState<T extends Record<string, any> = any> {
   auth: AuthState;
   follow: FollowReqState;
+  preferences: PreferencesState;
+  userInfo: UserDataReqState;
 }
 /**
  * Ignore below
@@ -27,8 +31,10 @@ export interface IRequestEntityTypeState<T> {
 }
 export type BaseRequestState = Record<string, string>;
 export type BaseRequestDataState = Record<string, string>;
-export type AuthOnlyAppState = Pick<AppState, 'auth'>;
+export type AuthOnlyState = Pick<AppState, 'auth'>;
 export type FollowReqOnlyAppState = Pick<AppState, 'follow'>;
+export type PreferencesOnlyAppState = Pick<AppState, 'preferences'>;
+export type UserInfoOnlyAppState = Pick<AppState, 'userInfo'>;
 export interface GeneralRequestDataState {
   [name: string]: any;
 }

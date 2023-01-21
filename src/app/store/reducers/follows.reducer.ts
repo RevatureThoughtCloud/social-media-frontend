@@ -5,16 +5,15 @@ import {
   FOLLOW_SUCCESS,
   UNFOLLOW_FAILED,
   UNFOLLOW_SUCCESS,
-  GET_FOLLOWERS,
-  GET_FOLLOWINGS,
   Follow,
   FollowSuccess,
   FollowFailed,
   UnFollowSuccess,
   UnFollowFailed,
   UNFOLLOW,
+  UnFollow,
+  RESET_FOLLOW,
 } from '../actions/follows.actions';
-import { AuthOnlyAppState } from '../app.state';
 
 export interface FollowReqState {
   followersUserName: string;
@@ -24,6 +23,7 @@ export interface FollowReqState {
   error: boolean;
   errorResponse: any;
   successResponse: any;
+  isFollowOrUnfollow: boolean;
 }
 
 const defaultState: FollowReqState = {
@@ -34,6 +34,7 @@ const defaultState: FollowReqState = {
   error: false,
   errorResponse: '',
   successResponse: '',
+  isFollowOrUnfollow: true,
 };
 
 export function followReducer(
@@ -48,14 +49,16 @@ export function followReducer(
         followersUserName: 'CURRENTUSER',
         inProgress: true,
         followingsUserName: followUser.username,
+        isFollowOrUnfollow: true,
       };
     case UNFOLLOW:
-      const unfollowUser = action as Follow;
+      const unfollowUser = action as UnFollow;
       return {
         ...state,
         followersUserName: 'CURRENTUSER',
         inProgress: true,
         followingsUserName: unfollowUser.username,
+        isFollowOrUnfollow: false,
       };
     case FOLLOW_SUCCESS:
       const followSuccess = action as FollowSuccess;
@@ -97,6 +100,8 @@ export function followReducer(
         errorResponse: 'Failed UNfollowed' + state.followingsUserName,
       };
 
+    case RESET_FOLLOW:
+      return defaultState;
     default:
       return state;
   }

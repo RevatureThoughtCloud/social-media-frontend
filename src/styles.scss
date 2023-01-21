@@ -184,6 +184,10 @@ body {
   width: 100%;
 }
 
+.partial-width {
+  width: 60%;
+}
+
 .header-image {
   background-image: url("./assets/images/favicon.png");
   background-size: cover;
@@ -192,6 +196,7 @@ body {
 }
 
 #post-feed {
+  // margin: auto;
   width: 60%;
   align-content: center;
 }
@@ -201,6 +206,8 @@ body {
 }
 
 .form {
+  // margin:auto;
+  // width:60%;
   margin-bottom: 1em;
 }
 
