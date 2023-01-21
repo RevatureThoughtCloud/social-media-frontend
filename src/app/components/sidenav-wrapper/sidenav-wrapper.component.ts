@@ -1,15 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import User from 'src/app/models/User';
-import { FollowsService } from 'src/app/services/follows.service';
-import {
-  GetFollowers,
-  GetFollowings,
-} from 'src/app/store/actions/user-data.actions';
-import { AuthState } from 'src/app/store/reducers/auth.reducer';
-import { FollowReqState } from 'src/app/store/reducers/follows.reducer';
-import { UserDataReqState } from 'src/app/store/reducers/user-data.reduces';
+import { Component, Input } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import User from "src/app/models/User";
+import { GetFollowings, GetFollowers } from "src/app/store/actions/user-data.actions";
+import { AuthState } from "src/app/store/reducers/auth.reducer";
+import { FollowReqState } from "src/app/store/reducers/follows.reducer";
+import { UserDataReqState } from "src/app/store/reducers/user-data.reduces";
 
 @Component({
   selector: 'app-sidenav-wrapper',
