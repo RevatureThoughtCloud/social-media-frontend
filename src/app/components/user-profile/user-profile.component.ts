@@ -27,7 +27,7 @@ export class UserProfileComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;
@@ -90,8 +90,8 @@ export class UserProfileComponent implements OnInit {
   };
 
   //Toggle Follow / Unfollow button
-  onToggleFollowing(following: boolean) {
-    this.profileOwner.followedByCurrentUser = following;
+  onToggleFollowing(following: User) {
+    this.profileOwner.followedByCurrentUser = true;
 
     this.profileOwner.followersCount = following
       ? ++this.profileOwner.followersCount

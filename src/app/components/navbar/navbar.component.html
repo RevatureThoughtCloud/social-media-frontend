@@ -1,44 +1,59 @@
-<div>
-  <mat-toolbar>
-    <mat-toolbar-row>
-      <span class="mx-4 logo" [routerLink]="['/post-feed']">ThoughtCloud</span>
-      <button
-        mat-icon-button
-        color="accent"
-        aria-label="Example icon button with a menu icon"
-        (click)="toggleTheme()"
-      >
-        <mat-icon>invert_colors</mat-icon>
-      </button>
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        (menuOpened)="toggleNotes()"
-        (menuClosed)="toggleNotes()"
-        color="accent"
-        aria-label="Example icon button with a menu icon"
-      >
-        <mat-icon [matBadge]="count" [matBadgeHidden]="menuOpen || count == 0"
-          >menu</mat-icon
-        >
-      </button>
-      <mat-menu #menu="matMenu">
-        <a routerLink="/notifications" mat-menu-item>
-          Notifications<span
-            [matBadge]="count"
-            [matBadgeHidden]="count == 0"
-            matBadgeOverlap="false"
-            matBadgeSize="small"
-            matBadgeColor="warn"
-          ></span>
-        </a>
-      </mat-menu>
-      <span class="spacer"></span>
+<mat-toolbar *ngIf="auth$ | async as auth">
+  <mat-toolbar-row>
+    <button mat-icon-button color="accent" (click)="expandSideNav()">
+      <mat-icon>menu</mat-icon>
+    </button>
 
-      <button *ngIf="isLoggedIn()" mat-button (click)="logout()">Logout</button>
-      <button *ngIf="!isLoggedIn()" mat-button (click)="goToLogin()">
-        Login
-      </button>
-    </mat-toolbar-row>
-  </mat-toolbar>
-</div>
+    <span class="mx-4 logo" [routerLink]="['/post-feed']">ThoughtCloud</span>
+    <button
+      mat-icon-button
+      color="accent"
+      aria-label="Example icon button with a menu icon"
+      (click)="toggleTheme()"
+    >
+      <mat-icon>invert_colors</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      (menuOpened)="toggleNotes()"
+      (menuClosed)="toggleNotes()"
+      color="accent"
+      aria-label="Example icon button with a menu icon"
+    >
+      <mat-icon [matBadge]="count" [matBadgeHidden]="menuOpen || count == 0"
+        >notifications_on</mat-icon
+      >
+    </button>
+    <mat-menu #menu="matMenu">
+      <a routerLink="/notifications" mat-menu-item>
+        Notifications<span
+          [matBadge]="count"
+          [matBadgeHidden]="count == 0"
+          matBadgeOverlap="false"
+          matBadgeSize="small"
+          matBadgeColor="warn"
+        ></span>
+      </a>
+    </mat-menu>
+    <span class="spacer"></span>
+    <div class="search-bar">
+      <mat-icon>search</mat-icon>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input type="text" placeholder="Search" matInput />
+        </mat-form-field>
+      </form>
+    </div>
+    <span class="spacer"></span>
+    <info-popover></info-popover>
+
+    <button *ngIf="!auth.loggedIn" mat-button (click)="goToLogin()">
+      Login
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<app-sidenav-wrapper
+  *ngIf="preferences$ | async as pref"
+  [isExpanded]="pref?.sidebarExpanded ?? false"
+></app-sidenav-wrapper>

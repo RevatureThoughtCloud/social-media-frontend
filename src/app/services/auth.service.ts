@@ -24,21 +24,12 @@ export class AuthService {
     });
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<User> {
     const payload = { email: email, password: password };
-    const res = this.http
-      .post<any>(`${this.authUrl}/login`, payload, {
-        headers: environment.headers,
-        withCredentials: environment.withCredentials,
-      })
-      .pipe(
-        map((data: User) => {
-          this.currentUser = data;
-          this.store.dispatch(new LoginSuccess(data));
-        })
-      );
-
-    return res;
+    return this.http.post<any>(`${this.authUrl}/login`, payload, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    });
   }
 
   isLoggedIn(): boolean {

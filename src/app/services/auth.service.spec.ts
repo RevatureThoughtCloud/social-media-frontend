@@ -1,11 +1,14 @@
-import { HttpTestingController, HttpClientTestingModule } from "@angular/common/http/testing";
-import { TestBed } from "@angular/core/testing";
-import { StoreModule } from "@ngrx/store";
-import { environment } from "src/environments/environment";
-import User from "../models/User";
-import { LoginSuccess } from "../store/actions/auth.actions";
-import { authReducer } from "../store/reducers/auth.reducer";
-import { AuthService } from "./auth.service";
+import {
+  HttpTestingController,
+  HttpClientTestingModule,
+} from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
+import { environment } from 'src/environments/environment';
+import User from '../models/User';
+import { LoginSuccess } from '../store/actions/auth.actions';
+import { authReducer } from '../store/reducers/auth.reducer';
+import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -39,7 +42,7 @@ describe('AuthService', () => {
     );
     const loginSuccess = new LoginSuccess(user);
     service.login(payload.email, payload.password).subscribe((res) => {
-      expect(res).toEqual(loginSuccess);
+      expect(res).toEqual(user);
     });
   });
 
