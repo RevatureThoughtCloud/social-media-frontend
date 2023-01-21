@@ -4,17 +4,25 @@ import { PostService } from './post.service';
 import { environment } from 'src/environments/environment';
 import Post from '../models/Post';
 import User from '../models/User';
+import { NotificationService } from './notification.service';
+import { of } from 'rxjs';
 
+// This test file tests the PostService which is responsible for handling all post-related logic
 describe('PostService', () => {
   let service: PostService;
   let httpTestingController: HttpTestingController;
 
   // Configure the test environment before each test
   beforeEach(() => {
+    const mockNotificationService = {
+      getNotificationCount: jasmine.createSpy().and.returnValue(of(1))
+    };
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [PostService]
     });
+    // Override the provider for the NotificationService
+    TestBed.overrideProvider(NotificationService, { useValue: mockNotificationService });
     service = TestBed.inject(PostService);
     httpTestingController = TestBed.inject(HttpTestingController);
   });
@@ -92,7 +100,7 @@ describe('PostService', () => {
   it('should upsert the post', () => {
     // Test data
     const testPostsForUpsertPosts = new Post(1, 'Test post 1', 'test-image-1.jpg', new User(1, 'test@test.com', 'Test', 'User', 'testuser'), [], 'text');
-
+    
     // Subscribe to the service method and assert that the returned data is correct
     service.upsertPost(testPostsForUpsertPosts).subscribe(post => {
       expect(post).toEqual(testPostsForUpsertPosts);
