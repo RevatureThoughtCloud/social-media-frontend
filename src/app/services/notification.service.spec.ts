@@ -54,6 +54,7 @@ describe('NotificationService', () => {
           firstName: 'bob',
           lastName: 'loblaw',
           userName: 'bobloblaw',
+          aboutMe: 'About Me',
           followersCount: 0,
           followingsCount: 0,
           followedByCurrentUser: false
@@ -64,6 +65,7 @@ describe('NotificationService', () => {
           firstName: 'bob',
           lastName: 'loblaw',
           userName: 'bobloblaw',
+          aboutMe: 'About Me',
           followersCount: 0,
           followingsCount: 0,
           followedByCurrentUser: false
@@ -78,6 +80,7 @@ describe('NotificationService', () => {
             firstName: 'bob',
             lastName: 'loblaw',
             userName: 'bobloblaw',
+            aboutMe: 'About Me',
             followersCount: 0,
             followingsCount: 0,
             followedByCurrentUser: false
@@ -119,6 +122,7 @@ describe('NotificationService', () => {
         firstName: 'bob',
         lastName: 'loblaw',
         userName: 'bobloblaw',
+        aboutMe: 'About Me',
         followersCount: 0,
         followingsCount: 0,
         followedByCurrentUser: false
@@ -129,6 +133,7 @@ describe('NotificationService', () => {
         firstName: 'bob',
         lastName: 'loblaw',
         userName: 'bobloblaw',
+        aboutMe: 'About Me',
         followersCount: 0,
         followingsCount: 0,
         followedByCurrentUser: false
@@ -143,6 +148,7 @@ describe('NotificationService', () => {
           firstName: 'bob',
           lastName: 'loblaw',
           userName: 'bobloblaw',
+          aboutMe: 'About Me',
           followersCount: 0,
           followingsCount: 0,
           followedByCurrentUser: false
@@ -179,6 +185,7 @@ describe('NotificationService', () => {
         firstName: 'bob',
         lastName: 'loblaw',
         userName: 'bobloblaw',
+        aboutMe: 'About Me',
         followersCount: 0,
         followingsCount: 0,
         followedByCurrentUser: false
@@ -189,6 +196,7 @@ describe('NotificationService', () => {
         firstName: 'bob',
         lastName: 'loblaw',
         userName: 'bobloblaw',
+        aboutMe: 'About Me',
         followersCount: 0,
         followingsCount: 0,
         followedByCurrentUser: false
@@ -203,6 +211,7 @@ describe('NotificationService', () => {
           firstName: 'bob',
           lastName: 'loblaw',
           userName: 'bobloblaw',
+          aboutMe: 'About Me',
           followersCount: 0,
           followingsCount: 0,
           followedByCurrentUser: false
