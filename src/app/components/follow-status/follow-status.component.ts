@@ -34,8 +34,8 @@ export class FollowStatusComponent {
           if (res.completed && !res.error && !res.inProgress) {
             this.profileOwner.followersCount = this.profileOwner
               .followedByCurrentUser
-              ? ++this.profileOwner.followersCount
-              : --this.profileOwner.followersCount;
+              ? --this.profileOwner.followersCount
+              : ++this.profileOwner.followersCount;
             this.profileOwner.followedByCurrentUser =
               !this.profileOwner.followedByCurrentUser;
 

@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   userUrl: string = `${environment.baseUrl}/user`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(`${this.userUrl}/${id}`, {
@@ -24,5 +24,15 @@ export class UserService {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
     });
+  }
+
+  getUserBySearchText(searchText: string): Observable<User[]> {
+    return this.http.get<User[]>(
+      `${this.userUrl}` + '/search/' + `${searchText}`,
+      {
+        headers: environment.headers,
+        withCredentials: environment.withCredentials,
+      }
+    );
   }
 }

@@ -1,0 +1,20 @@
+<div class="search-container">
+  <input
+    class="search-bar2"
+    placeholder="Search"
+    matInput
+    type="search"
+    (keyup)="onChangeEvent($event)"
+    [(ngModel)]="search"
+    [matAutocomplete]="auto"
+  />
+
+  <mat-autocomplete #auto="matAutocomplete" class="search-results">
+    <mat-option
+      *ngFor="let user of searchResults"
+      [routerLink]="['/profile/', user.id]"
+    >
+      {{ user.firstName + " " + user.lastName }}
+    </mat-option>
+  </mat-autocomplete>
+</div>
