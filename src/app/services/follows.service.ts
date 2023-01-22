@@ -1,14 +1,8 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
-import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import User from '../models/User';
-import { Store } from '@ngrx/store';
-import { AuthState } from '../store/reducers/auth.reducer';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable, catchError, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
+import User from "../models/User";
 
 const PROTOCOL = 'http';
 const PORT = 8080;
