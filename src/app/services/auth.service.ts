@@ -1,8 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import User from '../models/User';
+import { LoginSuccess, LogoutSuccess } from '../store/actions/auth.actions';
+import { AuthState } from '../store/reducers/auth.reducer';
 
 @Injectable({
   providedIn: 'root',
@@ -10,19 +13,23 @@ import User from '../models/User';
 export class AuthService {
   authUrl: string = `${environment.baseUrl}/auth`;
   currentUser: User = new User(0, '', '', '', '');
+  auth$: Observable<AuthState>;
+  constructor(
+    private http: HttpClient,
+    private store: Store<{ auth: AuthState }>
+  ) {
+    this.auth$ = store.select('auth');
+    this.auth$.subscribe((res) => {
+      this.currentUser = res.user ?? new User(0, '', '', '', '');
+    });
+  }
 
-  constructor(private http: HttpClient) {}
-
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<User> {
     const payload = { email: email, password: password };
-    const res = this.http.post<any>(`${this.authUrl}/login`, payload, {
+    return this.http.post<any>(`${this.authUrl}/login`, payload, {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
     });
-    res.subscribe((data) => {
-      this.currentUser = data;
-    });
-    return res;
   }
 
   isLoggedIn(): boolean {
@@ -33,8 +40,11 @@ export class AuthService {
   }
 
   logout(): void {
-    this.http.post(`${this.authUrl}/logout`, null).subscribe();
+    //this.currentUser = new User(0, '', '', '', '');
+    // this.store.dispatch(new LogoutSuccess());
+    this.http.post(`${this.authUrl}/logout`, null);
     this.currentUser = new User(0, '', '', '', '');
+    this.store.dispatch(new LogoutSuccess());
   }
 
   register(
@@ -49,7 +59,7 @@ export class AuthService {
       lastName: lastName,
       email: email,
       password: password,
-      username: userName,
+      userName: userName,
     };
     return this.http.post<any>(`${this.authUrl}/register`, payload, {
       headers: environment.headers,

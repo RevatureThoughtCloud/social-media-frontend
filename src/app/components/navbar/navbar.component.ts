@@ -1,7 +1,16 @@
-import { Component, HostBinding, OnChanges, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
+import {
+  ChangeTheme,
+  ToggleSidebar,
+} from 'src/app/store/actions/user-preferences.actions';
+import { AuthOnlyState } from 'src/app/store/app.state';
+import { AuthState } from 'src/app/store/reducers/auth.reducer';
+import { PreferencesState } from 'src/app/store/reducers/user-preferences.reducers';
 
 @Component({
   selector: 'app-navbar',
@@ -9,37 +18,51 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
+  private _menuOpen: boolean = false;
+  public preferences$: Observable<PreferencesState>;
+  public auth$: Observable<AuthState>;
+  public isExpanded: boolean = false;
 
-  ngOnInit(): void {}
+  constructor(
+    private notiService: NotificationService,
+    private router: Router,
+    private store: Store<{ preferences: PreferencesState; auth: AuthState }>
+  ) {
+    this.preferences$ = store.select('preferences');
+    this.auth$ = store.select('auth');
+  }
+
+  ngOnInit(): void {
+    this.notiService.getNotificationCount();
+  }
 
   ngOnDestroy() {}
 
-  isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
+  /* ****** notification menu stuff ****** */
+
+  get count(): number {
+    return this.notiService.count;
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['login']);
+  get menuOpen() {
+    return this._menuOpen;
   }
+
+  toggleNotes(): void {
+    this._menuOpen = !this._menuOpen;
+  }
+
+  expandSideNav(): void {
+    this.store.dispatch(new ToggleSidebar());
+  }
+
+  /* ******************************** */
 
   goToLogin() {
     this.router.navigate(['login']);
   }
 
   toggleTheme() {
-    if (
-      document.getElementById('root')?.getAttribute('class') ===
-      'darkMode mat-app-background root'
-    ) {
-      document
-        .getElementById('root')
-        ?.setAttribute('class', 'mat-app-background root');
-    } else {
-      document
-        .getElementById('root')
-        ?.setAttribute('class', 'darkMode mat-app-background root');
-    }
+    this.store.dispatch(new ChangeTheme(''));
   }
 }

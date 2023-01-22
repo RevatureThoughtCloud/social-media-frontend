@@ -1,16 +1,20 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideMockStore } from '@ngrx/store/testing';
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-
+  let httpMock: HttpTestingController;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
+      imports: [HttpClientTestingModule],
+      declarations: [LoginComponent],
+      providers: [provideMockStore({})]
     })
-    .compileComponents();
+      .compileComponents();
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
   beforeEach(() => {

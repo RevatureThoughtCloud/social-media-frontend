@@ -31,9 +31,16 @@ $angular-dark-theme: mat.define-dark-theme(
     ),
   )
 );
+:root {
+  --noti-color:  rgb(63, 32, 240);
+  --noti-hoover: rgba(63, 32, 240, 0.6);
+}
 
 .darkMode {
   @include mat.all-component-colors($angular-dark-theme);
+  --noti-color: #d63384;
+  --noti-hoover: #d6338494;
+;
 }
 
 html,
@@ -177,6 +184,10 @@ body {
   width: 100%;
 }
 
+.partial-width {
+  width: 60%;
+}
+
 .header-image {
   background-image: url("./assets/images/favicon.png");
   background-size: cover;
@@ -185,6 +196,7 @@ body {
 }
 
 #post-feed {
+  // margin: auto;
   width: 60%;
   align-content: center;
 }
@@ -194,6 +206,8 @@ body {
 }
 
 .form {
+  // margin:auto;
+  // width:60%;
   margin-bottom: 1em;
 }
 

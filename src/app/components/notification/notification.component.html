@@ -1,0 +1,12 @@
+<mat-list-item (click)="handleRead()">
+  <a matListItemTitle
+    ><span
+      class="noti-link"
+      [routerLink]="['/profile', notification.sender.id]"
+      >{{ notification.sender.userName }}</span
+    >{{ notification.message }}</a
+  >
+  <button mat-icon-button matListItemMeta (click)="handleDelete()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-list-item>

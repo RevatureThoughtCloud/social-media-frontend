@@ -1,0 +1,15 @@
+<button
+  *ngIf="followStatus$ | async as followStatus"
+  mat-raised-button
+  color="primary"
+  (click)="followAction()"
+  [disabled]="followStatus.inProgress"
+>
+  {{
+    followStatus.inProgress
+      ? "..."
+      : profileOwner.followedByCurrentUser
+      ? "Following"
+      : "Follow"
+  }}
+</button>

@@ -1,20 +1,26 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { LoginComponent } from './components/login/login.component';
+import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { PostFeedPageComponent } from './components/post-feed-page/post-feed-page.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "/login", pathMatch: "full" },
-  { path: "login", component: LoginComponent },
-  { path: "register", component: RegisterComponent },
-  { path: "post-feed", component: PostFeedPageComponent },
-  { path: "profile/:id", component: UserProfileComponent },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'post-feed', component: PostFeedPageComponent },
+  { path: 'profile/:id', component: UserProfileComponent },
+
+  { path: 'notifications', component: NotificationListComponent },
+  //until 404 component is made, redirect to post-feed if nonexistent route
+  { path: '**', redirectTo: '/post-feed', pathMatch: 'full' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

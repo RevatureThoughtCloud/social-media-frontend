@@ -1,0 +1,29 @@
+mat-card-content {
+  word-wrap: break-word;
+}
+
+mat-card-actions {
+  padding: 0;
+}
+
+mat-card-subtitle a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+
+.icon-div {
+  margin-right: 2%;
+  display: flex;
+  font-size: 18px;
+  padding-top: 4px;
+}
+
+.icon-div i {
+  font-size: 20px;
+  margin-right: 10%;
+}
+
+.fa-solid {
+  color: red;  
+}
