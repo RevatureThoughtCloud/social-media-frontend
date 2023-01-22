@@ -6,7 +6,7 @@ import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
-
+import { getImage } from 'src/app/pictures';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -21,13 +21,13 @@ export class UserProfileComponent implements OnInit {
   isCurrentUserProfile: boolean;
   profileOwner: User = {} as User;
   isEditing: boolean = false;
-
+  public getImg = getImage;
   constructor(
     private postService: PostService,
     private authService: AuthService,
     private userService: UserService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.currentUser = this.authService.currentUser;

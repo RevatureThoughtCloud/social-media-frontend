@@ -3,7 +3,7 @@
     <mat-card-header>
       <div mat-card-avatar class="header-image">
         <a [routerLink]="['/profile/', post.author.id]">
-          <div mat-card-avatar></div>
+          <img mat-card-avatar [src]="getImg(post.author.id)" />
         </a>
       </div>
       <mat-card-title
@@ -15,10 +15,20 @@
         ></mat-card-subtitle
       >
       <div class="ms-auto">
-        <button mat-icon-button matListItemMeta (click)="toggleEdit()" *ngIf="post.author.id === this.currentUser.id" >
+        <button
+          mat-icon-button
+          matListItemMeta
+          (click)="toggleEdit()"
+          *ngIf="post.author.id === this.currentUser.id"
+        >
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button matListItemMeta (click)="handleDelete()" *ngIf="post.author.id=== this.currentUser.id" >
+        <button
+          mat-icon-button
+          matListItemMeta
+          (click)="handleDelete()"
+          *ngIf="post.author.id === this.currentUser.id"
+        >
           <mat-icon>delete</mat-icon>
         </button>
       </div>
@@ -34,21 +44,19 @@
         {{ post.text }}
       </div>
       <ng-template #editFormTemplate>
-        <form
-      class="form"
-      [formGroup]="editForm"
-      (ngSubmit)="handleEdit()"
-    >
-      <mat-form-field class="full-width" appearance="fill">
-        <textarea matInput autofocus formControlName="text"></textarea>
-      </mat-form-field>
-      <div align="end">
-        <button mat-raised-button color="warn" (click)="toggleEdit()">
-          Cancel
-        </button>
-        <button mat-raised-button color="primary" type="submit">Submit</button>
-      </div>
-    </form>
+        <form class="form" [formGroup]="editForm" (ngSubmit)="handleEdit()">
+          <mat-form-field class="full-width" appearance="fill">
+            <textarea matInput autofocus formControlName="text"></textarea>
+          </mat-form-field>
+          <div align="end">
+            <button mat-raised-button color="warn" (click)="toggleEdit()">
+              Cancel
+            </button>
+            <button mat-raised-button color="primary" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
       </ng-template>
     </mat-card-content>
     <mat-card-actions align="end">

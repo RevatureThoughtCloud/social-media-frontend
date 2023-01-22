@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import User from '../models/User';
 import { environment } from 'src/environments/environment';
 
@@ -13,10 +13,16 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getUserById(id: number): Observable<User> {
-    return this.http.get<User>(`${this.userUrl}/${id}`, {
-      headers: environment.headers,
-      withCredentials: environment.withCredentials,
-    });
+    return this.http
+      .get<User>(`${this.userUrl}/${id}`, {
+        headers: environment.headers,
+        withCredentials: environment.withCredentials,
+      })
+      .pipe(
+        map((res) => {
+          return res;
+        })
+      );
   }
 
   updateUser(user: User): Observable<User> {

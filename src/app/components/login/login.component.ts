@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.auth$.subscribe((res: AuthState) => {
       if (res.loggedIn) {
-        this.router.navigate(['post-feed']);
+        this.router.navigate(['personalized-feed']);
       }
     });
   }
