@@ -36,6 +36,7 @@ import { SidenavWrapperComponent } from './components/sidenav-wrapper/sidenav-wr
 import { UserInfoPopoverComponent } from './components/user-info-popover/user-info-popover.component';
 import { SearchBarUserComponent } from './components/search-bar-user/search-bar-user.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PersonalizedFeedComponent } from './components/personalized-feed/personalized-feed.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     SidenavWrapperComponent,
     UserInfoPopoverComponent,
     SearchBarUserComponent,
+    PersonalizedFeedComponent,
   ],
   imports: [
     BrowserModule,

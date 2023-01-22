@@ -1,7 +1,7 @@
 <mat-sidenav-container fixedInViewport="true" autosize>
   <mat-sidenav #sidenav mode="side" opened="isExpanded">
     <mat-nav-list>
-      <mat-list-item [routerLink]="'dashboard'">
+      <mat-list-item [routerLink]="'personalized-feed'">
         <mat-icon mat-list-icon>home</mat-icon>
         <span *ngIf="isExpanded" class="menu-item">Dashboard</span>
       </mat-list-item>
@@ -21,9 +21,11 @@
         *ngFor="let following of (userInfo$ | async)?.followings"
         [routerLink]="['/profile/', following.id]"
       >
-        <mat-icon>person</mat-icon>
+        <div mat-card-avatar class="header-image">
+          <img mat-card-avatar [src]="getImg(following.id)" />
+        </div>
         <span *ngIf="isExpanded" class="menu-item">{{
-          following.userName
+          "@" + following.userName
         }}</span>
       </mat-list-item>
     </mat-nav-list>

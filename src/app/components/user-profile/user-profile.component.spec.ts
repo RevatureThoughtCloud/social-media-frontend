@@ -1,10 +1,11 @@
-import { RouterTestingModule } from '@angular/router/testing';
-import { ActivatedRoute } from '@angular/router';
-import { UserProfileComponent } from './user-profile.component';
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { PostService } from 'src/app/services/post.service';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { of } from 'rxjs';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { ComponentFixture, waitForAsync, TestBed } from "@angular/core/testing";
+import { ActivatedRoute } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
+import { provideMockStore } from "@ngrx/store/testing";
+import { of } from "rxjs";
+import { PostService } from "src/app/services/post.service";
+import { UserProfileComponent } from "./user-profile.component";
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
@@ -20,11 +21,10 @@ describe('UserProfileComponent', () => {
       declarations: [UserProfileComponent],
       providers: [
         { provide: PostService, useValue: postService },
-        { provide: ActivatedRoute, useValue: route }
-      ]
-    })
-      .compileComponents();
-
+        { provide: ActivatedRoute, useValue: route },
+        provideMockStore({}),
+      ],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -36,5 +36,4 @@ describe('UserProfileComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
 });

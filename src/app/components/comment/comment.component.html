@@ -2,7 +2,7 @@
   <div class="comment-head">
     <div mat-card-avatar class="header-image">
       <a [routerLink]="['/profile/', inputComment.author.id]">
-        <div mat-card-avatar></div>
+        <img mat-card-avatar [src]="getImg(inputComment.author.id)" />
       </a>
     </div>
     <div class="comment-info">

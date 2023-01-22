@@ -8,7 +8,7 @@ export default class User {
   followingsCount: number;
   aboutMe: string;
   followedByCurrentUser: boolean;
-  
+
   constructor(
     id: number,
     email: string,

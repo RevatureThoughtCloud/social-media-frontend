@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LoginComponent } from './components/login/login.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
+import { PersonalizedFeedComponent } from './components/personalized-feed/personalized-feed.component';
 import { PostFeedPageComponent } from './components/post-feed-page/post-feed-page.component';
 import { RegisterComponent } from './components/register/register.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'personalized-feed', component: PersonalizedFeedComponent },
   { path: 'post-feed', component: PostFeedPageComponent },
   { path: 'profile/:id', component: UserProfileComponent },
 

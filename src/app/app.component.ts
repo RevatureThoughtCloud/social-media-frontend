@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { PreferencesState } from './store/reducers/user-preferences.reducers';
+import { Component } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { PreferencesState } from "./store/reducers/user-preferences.reducers";
 
 @Component({
   selector: 'app-root',

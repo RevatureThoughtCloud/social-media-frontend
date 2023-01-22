@@ -2,15 +2,14 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import User from 'src/app/models/User';
-import { FollowsService } from 'src/app/services/follows.service';
 import {
-  GetFollowers,
   GetFollowings,
+  GetFollowers,
 } from 'src/app/store/actions/user-data.actions';
 import { AuthState } from 'src/app/store/reducers/auth.reducer';
 import { FollowReqState } from 'src/app/store/reducers/follows.reducer';
 import { UserDataReqState } from 'src/app/store/reducers/user-data.reduces';
-
+import { getImage } from 'src/app/pictures';
 @Component({
   selector: 'app-sidenav-wrapper',
   templateUrl: './sidenav-wrapper.component.html',
@@ -24,6 +23,7 @@ export class SidenavWrapperComponent {
   public userInfo$: Observable<UserDataReqState>;
   currentUser: User | undefined;
 
+  public getImg = getImage;
   follows$: Observable<FollowReqState>;
 
   constructor(

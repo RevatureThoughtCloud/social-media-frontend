@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import User from 'src/app/models/User';
-import { UserService } from 'src/app/services/user.service';
+import { Component } from "@angular/core";
+import User from "src/app/models/User";
+import { UserService } from "src/app/services/user.service";
 
 @Component({
   selector: 'search-bar-user',
@@ -12,7 +11,7 @@ export class SearchBarUserComponent {
   searchResults: User[] = [];
   public search: string = '';
   //s
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   onChangeEvent(event: any) {
     if (this.search != '') {
@@ -22,5 +21,5 @@ export class SearchBarUserComponent {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideMockStore } from '@ngrx/store/testing';
 import { FollowStatusComponent } from './follow-status.component';
 
 describe('FollowStatusComponent', () => {
@@ -8,9 +8,9 @@ describe('FollowStatusComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FollowStatusComponent ]
-    })
-    .compileComponents();
+      declarations: [FollowStatusComponent],
+      providers: [provideMockStore({})],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FollowStatusComponent);
     component = fixture.componentInstance;
