@@ -5,11 +5,13 @@ import { LoginComponent } from './components/login/login.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { PostFeedPageComponent } from './components/post-feed-page/post-feed-page.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'post-feed', component: PostFeedPageComponent },
   { path: 'profile/:id', component: UserProfileComponent },
