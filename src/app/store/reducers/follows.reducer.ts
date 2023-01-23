@@ -5,8 +5,6 @@ import {
   FOLLOW_SUCCESS,
   UNFOLLOW_FAILED,
   UNFOLLOW_SUCCESS,
-  GET_FOLLOWERS,
-  GET_FOLLOWINGS,
   Follow,
   FollowSuccess,
   FollowFailed,
@@ -101,6 +99,7 @@ export function followReducer(
         completed: true,
         errorResponse: 'Failed UNfollowed' + state.followingsUserName,
       };
+
     case RESET_FOLLOW:
       return defaultState;
     default:

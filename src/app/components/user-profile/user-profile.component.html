@@ -1,13 +1,23 @@
 <div class="container">
   <div>
-    <div class="user-circle"></div>
+    <img class="user-circle" [src]="getImg(profileOwner.id)" />
     <div>
-      <div class="profile-owner-details" *ngIf="!isEditing; else editProfileForm">
+      <div
+        class="profile-owner-details"
+        *ngIf="!isEditing; else editProfileForm"
+      >
         <h2>
           @{{ profileOwner.userName }}
-          <follow-status-button [target]="profileOwner" (toggle)="onToggleFollowing($event)"
-            *ngIf="!isCurrentUserProfile"></follow-status-button>
-          <button mat-raised-button color="primary" *ngIf="isCurrentUserProfile" (click)="toggleEditMode()">
+          <follow-status-button
+            [(profileOwner)]="profileOwner"
+            *ngIf="!isCurrentUserProfile"
+          ></follow-status-button>
+          <button
+            mat-raised-button
+            color="primary"
+            *ngIf="isCurrentUserProfile"
+            (click)="toggleEditMode()"
+          >
             Edit Profile
           </button>
         </h2>
@@ -36,7 +46,11 @@
             <button mat-raised-button color="warn" (click)="toggleEditMode()">
               Cancel
             </button>
-            <button mat-raised-button color="primary" (click)="updateProfile($event)">
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="updateProfile($event)"
+            >
               Update
             </button>
           </div>

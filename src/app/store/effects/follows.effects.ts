@@ -10,8 +10,6 @@ import {
   FOLLOW_SUCCESS,
   UNFOLLOW_FAILED,
   UNFOLLOW_SUCCESS,
-  GET_FOLLOWERS,
-  GET_FOLLOWINGS,
   Follow,
   FollowSuccess,
   FollowFailed,

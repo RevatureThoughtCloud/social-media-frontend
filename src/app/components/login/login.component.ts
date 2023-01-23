@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { Login } from 'src/app/store/actions/auth.actions';
+import {
+  GetFollowers,
+  GetFollowings,
+} from 'src/app/store/actions/user-data.actions';
+import { AuthOnlyState } from 'src/app/store/app.state';
+import { AuthState } from 'src/app/store/reducers/auth.reducer';
 
 @Component({
   selector: 'app-login',
@@ -14,23 +23,31 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
   });
+  auth$: Observable<AuthState>;
+  constructor(
+    private store: Store<{ auth: AuthState }>,
+    private router: Router
+  ) {
+    this.auth$ = this.store.select('auth');
+  }
 
-  constructor(private authService: AuthService, private router: Router, private notificationService: NotificationService) { }
-
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.auth$.subscribe((res: AuthState) => {
+      if (res.loggedIn) {
+        this.router.navigate(['personalized-feed']);
+      }
+    });
+  }
 
   onSubmit(e: any): void {
     e.preventDefault();
-    this.authService
-      .login(
+
+    this.store.dispatch(
+      new Login(
         this.loginForm.value.email || '',
         this.loginForm.value.password || ''
       )
-      .subscribe((response) => {
-        this.router.navigate(['post-feed']);
-        this.notificationService.getNotificationCount();
-
-      });
+    );
   }
 
   register(): void {

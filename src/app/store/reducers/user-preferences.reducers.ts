@@ -5,6 +5,7 @@ import {
   CHANGE_THEME_FAILED,
   ChangeTheme,
   RESET_REQ_STATE,
+  SIDEBAR_EXPANDED,
 } from '../actions/user-preferences.actions';
 
 const themes: string[] = [
@@ -15,11 +16,13 @@ const themes: string[] = [
 export interface PreferencesState {
   theme: string;
   index: number;
+  sidebarExpanded: boolean;
 }
 
 const defaultState: PreferencesState = {
   index: 0,
   theme: themes[0],
+  sidebarExpanded: false,
 };
 export function preferencesReducer(
   state: PreferencesState = defaultState,
@@ -32,6 +35,11 @@ export function preferencesReducer(
         ...state,
         index: new_index,
         theme: themes[new_index],
+      };
+    case SIDEBAR_EXPANDED:
+      return {
+        ...state,
+        sidebarExpanded: !state.sidebarExpanded,
       };
     default:
       return state;

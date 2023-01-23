@@ -4,7 +4,7 @@ import Like from 'src/app/models/Like';
 import Post from 'src/app/models/Post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
-
+import { getImage } from 'src/app/pictures';
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -15,6 +15,7 @@ export class CommentComponent implements OnInit {
     text: new FormControl(''),
   });
 
+  public getImg = getImage;
   editForm: FormGroup;
   editPost: boolean = false;
 
@@ -41,7 +42,7 @@ export class CommentComponent implements OnInit {
       });
   }
 
-  get currentUser(){
+  get currentUser() {
     return this.authService.currentUser;
   }
 

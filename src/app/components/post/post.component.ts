@@ -4,7 +4,7 @@ import Like from 'src/app/models/Like';
 import Post from 'src/app/models/Post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
-
+import { getImage } from 'src/app/pictures';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -16,7 +16,7 @@ export class PostComponent implements OnInit {
   });
 
   editForm: FormGroup;
-
+  getImg = getImage;
   @Output() handleDeletePost = new EventEmitter();
 
   @Input('post') post: Post;
@@ -39,7 +39,7 @@ export class PostComponent implements OnInit {
       });
   }
 
-  get currentUser(){
+  get currentUser() {
     return this.authService.currentUser;
   }
 
@@ -91,25 +91,21 @@ export class PostComponent implements OnInit {
   /* ********************************** */
   /* ******************** Modify Posts **********************/
 
-  toggleEdit(){
+  toggleEdit() {
     this.editForm = new FormGroup({
       text: new FormControl(this.post.text),
     });
     this.editPost = !this.editPost;
   }
-  handleEdit(){
+  handleEdit() {
     this.post.text = this.editForm.value.text;
-    
 
     this.postService.upsertPost(this.post).subscribe((comment) => {
-      
       this.post = comment;
 
       this.editPost = !this.editPost;
     });
   }
-
-
 
   /* ***************************************************** */
 

@@ -25,21 +25,33 @@ export class AuthService {
     });
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<User> {
     const payload = { email: email, password: password };
-    const res = this.http
-      .post<any>(`${this.authUrl}/login`, payload, {
-        headers: environment.headers,
-        withCredentials: environment.withCredentials,
-      })
-      .pipe(
-        map((data: User) => {
-          this.currentUser = data;
-          this.store.dispatch(new LoginSuccess(data));
-        })
-      );
+    return this.http.post<any>(`${this.authUrl}/login`, payload, {
+      headers: environment.headers,
+      withCredentials: environment.withCredentials,
+    });
+  }
 
-    return res;
+  resetPassTokenRequest(userEmail: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.authUrl}/reset-password`,
+      { userEmail },
+      {
+        headers: environment.headers,
+      }
+    );
+  }
+
+  resetPass(newPassword: string, token: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.authUrl}/reset-password`,
+      { newPassword },
+      {
+        headers: environment.headers,
+        params: { token: token },
+      }
+    );
   }
 
   isLoggedIn(): boolean {

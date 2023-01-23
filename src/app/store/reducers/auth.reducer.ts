@@ -24,7 +24,7 @@ export interface AuthState {
 const defaultState: AuthState = {
   loggedIn: false,
   loggingIn: false,
-  user: undefined,
+  user: new User(0, '', '', '', ''),
   error: false,
   errorResponse: '',
 

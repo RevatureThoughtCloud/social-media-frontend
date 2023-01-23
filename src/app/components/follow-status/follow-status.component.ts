@@ -13,43 +13,44 @@ import { FollowReqState } from 'src/app/store/reducers/follows.reducer';
 export class FollowStatusComponent {
   //User that is being followed/unfollowed
   @Input()
-  target: User;
-
-  //Switch between unfollow/follow label
-  @Output() toggle = new EventEmitter<boolean>();
+  profileOwner: User;
+  //To report changes in following status
+  @Output() profileOwnerChange = new EventEmitter<User>();
 
   //View follow request status
   followStatus$: Observable<FollowReqState>;
 
-  //whether request is in progress
-  inProgress: boolean = false;
-
   constructor(private store: Store<{ follow: FollowReqState }>) {
     this.followStatus$ = store.select('follow');
+  }
 
+  ngOnInit(): void {
     this.followStatus$
       .pipe(
         tap((res: FollowReqState) => {
-          //get progress
-          this.inProgress = res.inProgress;
-
           //if complete and no error
           //let parent know the follow/unfollow
           //was successful
           if (res.completed && !res.error && !res.inProgress) {
-            this.toggle.emit(!this.target.followedByCurrentUser);
+            this.profileOwner.followersCount = this.profileOwner
+              .followedByCurrentUser
+              ? --this.profileOwner.followersCount
+              : ++this.profileOwner.followersCount;
+            this.profileOwner.followedByCurrentUser =
+              !this.profileOwner.followedByCurrentUser;
+
+            this.profileOwnerChange.emit(this.profileOwner);
           }
         })
       )
       .subscribe();
   }
-
   //Dispatch new (un)follow request
   followAction() {
-    if (this.target.followedByCurrentUser) {
-      this.store.dispatch(new UnFollow(this.target.userName));
+    if (this.profileOwner.followedByCurrentUser) {
+      this.store.dispatch(new UnFollow(this.profileOwner.userName));
     } else {
-      this.store.dispatch(new Follow(this.target.userName));
+      this.store.dispatch(new Follow(this.profileOwner.userName));
     }
   }
 }
