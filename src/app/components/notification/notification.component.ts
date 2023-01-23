@@ -1,13 +1,15 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { NotificationService } from 'src/app/services/notification.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import Notification from 'src/app/models/Notification';
 
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
-  styleUrls: ['./notification.component.scss'],
+  styleUrls: ['./notification.component.scss']
 })
 export class NotificationComponent {
-  constructor(private notiService: NotificationService) { }
+
+
+  constructor(){}
 
   @Input() notification: Notification;
 
@@ -15,11 +17,13 @@ export class NotificationComponent {
 
   @Output() onRead = new EventEmitter<Notification>();
 
-  handleRead() {
+  handleRead(){
     this.onRead.emit(this.notification);
   }
 
-  handleDelete() {
+  handleDelete(){
     this.handleClick.emit(this.notification);
   }
+
+
 }
