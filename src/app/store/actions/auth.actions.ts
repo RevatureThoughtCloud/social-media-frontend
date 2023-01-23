@@ -17,22 +17,22 @@ export const RESET_AUTH = '[Auth] Reset auth data';
 export const RESET_SSO_AUTH = '[Auth] Reset auth data (SSO)';
 
 export class Login implements Action {
-  constructor(public username: string, public password: string) {}
+  constructor(public username: string, public password: string) { }
   type = LOGIN;
 }
 
 export class LoginSuccess implements Action {
   type = LOGIN_SUCCESS;
-  constructor(public user: User) {}
+  constructor(public user: User) { }
 }
 
 export class LoginFailed implements Action {
-  constructor(public error: any) {}
+  constructor(public error: any) { }
   type = LOGIN_FAILED;
 }
 
 export class VerifySession implements Action {
-  constructor(public login = true, public updateEndpoints = true) {}
+  constructor(public login = true, public updateEndpoints = true) { }
   type = VERIFY_SESSION;
 }
 
@@ -42,7 +42,7 @@ export class InvalidSession implements Action {
     public upgradeInProgress = false,
     public domainMismatch = false,
     public ssoOptions = ''
-  ) {}
+  ) { }
   type = SESSION_INVALID;
 }
 
@@ -63,6 +63,6 @@ export class LogoutSuccess implements Action {
 }
 
 export class LogoutFailed implements Action {
-  constructor(public error: any) {}
+  constructor(public error: any) { }
   type = LOGOUT_FAILED;
 }
