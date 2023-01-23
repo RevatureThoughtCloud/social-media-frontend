@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Notification from '../models/Notification';
 
@@ -42,6 +43,14 @@ export class NotificationService {
         withCredentials: withCredentials,
       })
       .subscribe((res) => (this._notifications = res));
+  }
+
+  getNotificationsLimit5(): Observable<Notification[]>{
+    return this.http
+    .get<Notification[]>(this.url+"/nav", {
+      headers: headers,
+      withCredentials: withCredentials,
+    })
   }
 
   markRead(notification: Notification) {
