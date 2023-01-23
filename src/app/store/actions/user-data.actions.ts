@@ -12,31 +12,31 @@ export const GET_USER_DATA_FAILED = '[User] Failed request';
 export const GET_USER_DATA_RESET = '[User] Reset state';
 
 export class GetFollowers implements Action {
-  constructor(public username: string) {}
+  constructor(public username: string) { }
   type = GET_FOLLOWERS;
 }
 
 export class GetFollowings implements Action {
-  constructor(public username: string) {}
+  constructor(public username: string) { }
   type = GET_FOLLOWINGS;
 }
 
 export class GetUserFollowersSuccess implements Action {
-  constructor(public followers: User[]) {}
+  constructor(public followers: User[]) { }
   type = GET_USER_FOLLOWERS_SUCCESS;
 }
 
 export class GetUserFollowingsSuccess implements Action {
-  constructor(public followings: User[]) {}
+  constructor(public followings: User[]) { }
   type = GET_USER_FOLLOWINGS_SUCCESS;
 }
 
 export class GetUserDataFailed implements Action {
-  constructor(public username: string) {}
+  constructor(public username: string) { }
   type = GET_USER_DATA_FAILED;
 }
 
 export class GetUserDataReset implements Action {
-  constructor(public username: string) {}
+  constructor(public username: string) { }
   type = GET_USER_DATA_RESET;
 }
