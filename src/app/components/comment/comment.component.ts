@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import Like from 'src/app/models/Like';
 import Post from 'src/app/models/Post';
+import { getImage } from 'src/app/pictures';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
-import { getImage } from 'src/app/pictures';
+
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -31,7 +32,7 @@ export class CommentComponent implements OnInit {
   constructor(
     private postService: PostService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.replies = this.inputComment.comments.length;
