@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
   auth$: Observable<AuthState>;
   constructor(
     private store: Store<{ auth: AuthState }>,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {
     this.auth$ = this.store.select('auth');
   }
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
     this.auth$.subscribe((res: AuthState) => {
       if (res.loggedIn) {
         this.router.navigate(['personalized-feed']);
+        this.notificationService.getNotificationCount();
       }
     });
   }
