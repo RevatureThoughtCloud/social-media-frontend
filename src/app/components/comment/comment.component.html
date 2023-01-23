@@ -31,7 +31,7 @@
         (click)="handleDelete()"
         *ngIf="
           inputComment.author.id === currentUser.id ||
-          originalPosterId === currentUser.id
+          parentPost.author.id === currentUser.id
         "
       >
         <mat-icon>delete</mat-icon>
@@ -101,7 +101,9 @@
   <div *ngFor="let comment of inputComment.comments" class="comment-container">
     <app-comment
       [comment]="comment"
+      [parentPost]="inputComment"
       (handleDeletePost)="handleCommentDelete($event)"
+      (handleNewComment)="updateForNewComment($event)"
     ></app-comment>
   </div>
 </div>
