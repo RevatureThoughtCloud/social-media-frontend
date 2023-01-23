@@ -11,12 +11,12 @@ mat-card-subtitle a {
   text-decoration: inherit;
 }
 
-
 .icon-div {
   margin-right: 2%;
   display: flex;
   font-size: 18px;
   padding-top: 4px;
+  cursor: pointer;
 }
 
 .icon-div i {
@@ -25,5 +25,5 @@ mat-card-subtitle a {
 }
 
 .fa-solid {
-  color: red;  
+  color: red;
 }
