@@ -1,4 +1,3 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import Notification from 'src/app/models/Notification';
 import { NotificationComponent } from './notification.component';
@@ -10,9 +9,9 @@ describe('NotificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [NotificationComponent],
-    }).compileComponents();
+      declarations: [ NotificationComponent ],      
+    })
+    .compileComponents();
 
     fixture = TestBed.createComponent(NotificationComponent);
     component = fixture.componentInstance;
@@ -27,7 +26,7 @@ describe('NotificationComponent', () => {
         aboutMe: 'About Me',
         followersCount: 0,
         followingsCount: 0,
-        followedByCurrentUser: false,
+        followedByCurrentUser: false
       },
       sender: {
         id: 1,
@@ -38,7 +37,7 @@ describe('NotificationComponent', () => {
         aboutMe: 'About Me',
         followersCount: 0,
         followingsCount: 0,
-        followedByCurrentUser: false,
+        followedByCurrentUser: false
       },
       post: {
         id: 1,
@@ -53,7 +52,7 @@ describe('NotificationComponent', () => {
           aboutMe: 'About Me',
           followersCount: 0,
           followingsCount: 0,
-          followedByCurrentUser: false,
+          followedByCurrentUser: false
         },
         comments: [],
         postType: 'Comment',
@@ -62,9 +61,10 @@ describe('NotificationComponent', () => {
       type: 'LIKE',
       status: 'UNREAD',
       message: ' has liked your post!',
-    };
+    }
 
     component.notification = mockNotification;
+
     fixture.detectChanges();
   });
 
@@ -74,8 +74,7 @@ describe('NotificationComponent', () => {
 
   it('should render message', () => {
     const message = fixture.nativeElement.querySelector('a').textContent;
-    expect(message).toEqual(
-      `${mockNotification.sender.userName}${mockNotification.message}`
-    );
-  });
+    expect(message).toEqual(`${mockNotification.sender.userName}${mockNotification.message}`)
+  })
+
 });
