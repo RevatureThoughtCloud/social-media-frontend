@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { Login } from 'src/app/store/actions/auth.actions';
 import {
   GetFollowers,
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
   auth$: Observable<AuthState>;
   constructor(
     private store: Store<{ auth: AuthState }>,
-    private router: Router
+    private router: Router,
+    private notificationService: NotificationService
   ) {
     this.auth$ = this.store.select('auth');
   }
@@ -33,7 +35,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.auth$.subscribe((res: AuthState) => {
       if (res.loggedIn) {
-        this.router.navigate(['post-feed']);
+        this.router.navigate(['personalized-feed']);
+        this.notificationService.getNotificationCount();
       }
     });
   }

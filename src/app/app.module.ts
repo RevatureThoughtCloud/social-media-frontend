@@ -36,6 +36,7 @@ import { SidenavWrapperComponent } from './components/sidenav-wrapper/sidenav-wr
 import { UserInfoPopoverComponent } from './components/user-info-popover/user-info-popover.component';
 import { SearchBarUserComponent } from './components/search-bar-user/search-bar-user.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PersonalizedFeedComponent } from './components/personalized-feed/personalized-feed.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     SidenavWrapperComponent,
     UserInfoPopoverComponent,
     SearchBarUserComponent,
+    PersonalizedFeedComponent,
     ResetPasswordComponent,
   ],
   imports: [
