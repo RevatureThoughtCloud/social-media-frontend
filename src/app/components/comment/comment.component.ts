@@ -21,13 +21,17 @@ export class CommentComponent implements OnInit {
   editPost: boolean = false;
 
   @Output() handleDeletePost = new EventEmitter();
+  @Output() handleNewComment = new EventEmitter();
 
   @Input('comment') inputComment: Post;
+  @Input('parentPost') parentPost: Post;
   replies: number;
   replyToComment: boolean = false;
   userLikedPost: boolean = false;
+  parentPostId: number | undefined;
 
-  @Input('posterId') originalPosterId: number;
+  
+  
 
   constructor(
     private postService: PostService,
@@ -36,6 +40,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit(): void {
     this.replies = this.inputComment.comments.length;
+
     this.postService
       .likeExists(this.inputComment, this.authService.currentUser)
       .subscribe((response) => {
@@ -70,6 +75,7 @@ export class CommentComponent implements OnInit {
         this.inputComment = response;
         this.replies = response.comments.length;
         this.toggleReplyToComment();
+        this.handleNewComment.emit(this.inputComment);
       });
   };
 
@@ -111,8 +117,26 @@ export class CommentComponent implements OnInit {
       this.editPost = !this.editPost;
     });
   }
+  /* *********************** Update Comments ****************************** */
+  updateForNewComment(comment: Post) {
+    this.inputComment.comments.forEach((element, index) => {
+      if (element.id == comment.id) {
+        this.inputComment.comments[index] = comment;
+      }
+    })
+    this.postService
+      .upsertPost({
+        ...this.inputComment,
+        comments: [...this.inputComment.comments],
+      })
+      .subscribe((response) => {
+        this.inputComment = response;
+        this.replies = response.comments.length;
+      });
+    this.handleNewComment.emit(this.inputComment);
+  }
 
-  /* ***************************************************** */
+   /* *********************** Like Post ****************************** */
 
   updateLikes() {
     this.postService.postById(this.inputComment.id).subscribe((response) => {
