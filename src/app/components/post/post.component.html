@@ -101,8 +101,9 @@
       <div *ngFor="let comment of post.comments" class="comment-container">
         <app-comment
           [comment]="comment"
-          [posterId]="post.author.id"
+          [parentPost]="post"
           (handleDeletePost)="handleCommentDelete($event)"
+          (handleNewComment)="updateForNewComment($event)"
         ></app-comment>
       </div>
     </mat-card-footer>
