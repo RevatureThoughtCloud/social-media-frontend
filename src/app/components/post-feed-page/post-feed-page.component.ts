@@ -1,13 +1,6 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import Post from 'src/app/models/Post';
-import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 
@@ -28,7 +21,7 @@ export class PostFeedPageComponent implements OnInit {
   constructor(
     private postService: PostService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.postService.getAllTopPosts().subscribe((response) => {
