@@ -32,6 +32,27 @@ export class AuthService {
     });
   }
 
+  resetPassTokenRequest(userEmail: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.authUrl}/reset-password`,
+      { userEmail },
+      {
+        headers: environment.headers,
+      }
+    );
+  }
+
+  resetPass(newPassword: string, token: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.authUrl}/reset-password`,
+      { newPassword },
+      {
+        headers: environment.headers,
+        params: { token: token },
+      }
+    );
+  }
+
   isLoggedIn(): boolean {
     if (this.currentUser && this.currentUser.id !== 0) {
       return true;
