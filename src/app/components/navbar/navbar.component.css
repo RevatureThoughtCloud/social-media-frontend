@@ -1,3 +1,7 @@
 .logo {
-    cursor: pointer;
+  cursor: pointer;
+}
+.mat-toolbar {
+  position: fixed;
+  z-index: 10;
 }

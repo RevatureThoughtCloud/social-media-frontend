@@ -1,0 +1,38 @@
+<mat-sidenav-container fixedInViewport="true" autosize>
+  <mat-sidenav #sidenav mode="side" opened="isExpanded">
+    <mat-nav-list>
+      <mat-list-item [routerLink]="'personalized-feed'">
+        <mat-icon mat-list-icon>home</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Dashboard</span>
+      </mat-list-item>
+
+      <mat-list-item [routerLink]="'info'">
+        <mat-icon mat-list-icon>important_devices</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Info</span>
+      </mat-list-item>
+
+      <mat-list-item [routerLink]="'user'">
+        <mat-icon mat-list-icon>supervisor_account</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">User</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <div><span *ngIf="isExpanded" class="menu-item">Followings</span></div>
+      <mat-list-item
+        *ngFor="let following of (userInfo$ | async)?.followings"
+        [routerLink]="['/profile/', following.id]"
+      >
+        <div mat-card-avatar class="header-image">
+          <img mat-card-avatar [src]="getImg(following.id)" />
+        </div>
+        <span *ngIf="isExpanded" class="menu-item">{{
+          "@" + following.userName
+        }}</span>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Content - rendered Content for the current router path into the <router-outlet>, e.g. /dashboard or /info-->
+  <mat-sidenav-content fixedInViewport="true"
+    ><router-outlet></router-outlet
+  ></mat-sidenav-content>
+</mat-sidenav-container>

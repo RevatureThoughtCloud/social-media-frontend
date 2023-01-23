@@ -58,4 +58,12 @@ export class PostFeedPageComponent implements OnInit {
         this.toggleCreatePost();
       });
   };
+
+  deletePost(postId: number) {
+    if (confirm('Are you sure that you want to delete this post?')) {
+      this.postService.deletePost(postId).subscribe(() => {
+        this.posts = this.posts.filter((post) => post.id != postId);
+      });
+    }
+  }
 }

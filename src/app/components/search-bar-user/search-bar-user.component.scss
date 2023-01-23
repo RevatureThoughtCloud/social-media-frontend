@@ -1,0 +1,22 @@
+.search-bar2 {
+  border-radius: 20px;
+
+  border-style: dotted;
+  text-align: center;
+}
+a {
+  position: relative;
+  display: block;
+  background-color: gray;
+}
+
+.search-results {
+  position: absolute;
+  width: 100%;
+  min-width: 15rem;
+  max-width: 15rem;
+}
+.search-container {
+  min-width: 10rem;
+  max-width: 10rem;
+}

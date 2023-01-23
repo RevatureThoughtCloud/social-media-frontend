@@ -75,15 +75,15 @@ export class AuthEffect {
       ),
     { dispatch: false }
   );
-  /*
+
   logoutRequest$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType<Logout>(LOGOUT),
-        switchMap(() => {
+        map(() => {
           return this.authService.logout();
         })
       ),
     { dispatch: false }
-  );*/
+  );
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,7 +21,6 @@ import { Store } from '@ngrx/store';
 import { GeneralEntityAppState } from './store/app.state';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { NotificationComponent } from './components/notification/notification.component';
-import { FollowInfoComponent } from './components/follow-info/follow-info.component';
 
 import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
@@ -33,6 +32,12 @@ import { RatingModule } from 'primeng/rating';
 import { RippleModule } from 'primeng/ripple';
 import { FollowStatusComponent } from './components/follow-status/follow-status.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { SidenavWrapperComponent } from './components/sidenav-wrapper/sidenav-wrapper.component';
+import { UserInfoPopoverComponent } from './components/user-info-popover/user-info-popover.component';
+import { SearchBarUserComponent } from './components/search-bar-user/search-bar-user.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { PersonalizedFeedComponent } from './components/personalized-feed/personalized-feed.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,11 +52,17 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     UserProfileComponent,
     NotificationListComponent,
     NotificationComponent,
-    FollowInfoComponent,
+
     FollowStatusComponent,
+    SidenavWrapperComponent,
+    UserInfoPopoverComponent,
+    SearchBarUserComponent,
+    PersonalizedFeedComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
+    MatAutocompleteModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
@@ -64,6 +75,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     DropdownModule,
     DialogModule,
     InputTextModule,
+    FormsModule,
     RatingModule,
     RippleModule,
     StoreDevtoolsModule.instrument({

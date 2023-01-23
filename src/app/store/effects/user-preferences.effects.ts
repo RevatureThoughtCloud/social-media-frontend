@@ -6,12 +6,9 @@ import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 
 import {
   CHANGE_THEME,
-  CHANGE_THEME_SUCCESS,
-  CHANGE_THEME_FAILED,
   ChangeTheme,
-  ChangeThemeSuccess,
-  ChangeThemeFailed,
-  ResetState,
+  ToggleSidebar,
+  SIDEBAR_EXPANDED,
 } from '../actions/user-preferences.actions';
 
 import { PreferencesOnlyAppState } from '../app.state';
@@ -27,6 +24,17 @@ export class PreferencesEffect {
     () =>
       this.actions$.pipe(
         ofType<ChangeTheme>(CHANGE_THEME),
+        map((action) => {
+          return [];
+        })
+      ),
+    { dispatch: false }
+  );
+
+  sideBarExpanded$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType<ToggleSidebar>(SIDEBAR_EXPANDED),
         map((action) => {
           return [];
         })

@@ -1,13 +1,12 @@
 <mat-card class="user-card">
-    <a [routerLink]="['/profile/', user.id]">
-        <div class="user-circle"></div>
-    </a>
-    <mat-divider></mat-divider>
-    <p style="padding-top: 1em; font-weight: bold;">
-        {{user.firstName}} {{user.lastName}}
-    </p>
-    <p>
-        {{user.email}}
-    </p>
-
+  <a [routerLink]="['/profile/', user.id]">
+    <img class="user-circle" [src]="getImg(user.id)" />
+  </a>
+  <mat-divider></mat-divider>
+  <p style="padding-top: 1em; font-weight: bold">
+    {{ user.firstName }} {{ user.lastName }}
+  </p>
+  <p>
+    {{ user.email }}
+  </p>
 </mat-card>

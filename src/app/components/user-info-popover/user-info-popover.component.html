@@ -1,0 +1,37 @@
+<ng-container class="dropdown" *ngIf="(auth$ | async)?.user as currentUser">
+  <ng-container *ngIf="currentUser.id > 0">
+    <button mat-raised-button [matMenuTriggerFor]="menu" color="accent">
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <div class="userIsAuth">
+        <div style="text-align: center">
+          <p class="dropdown-item-text">
+            {{ currentUser?.firstName + " " + currentUser?.lastName }}
+          </p>
+          <p class="dropdown-item-text">
+            {{ "@" + currentUser?.userName }}
+          </p>
+        </div>
+        <button mat-menu-item>
+          <mat-icon>dialpad</mat-icon>
+          <span>Redial</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>voicemail</mat-icon>
+          <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications_off</mat-icon>
+          <span>Disable alerts</span>
+        </button>
+        <mat-divider></mat-divider>
+
+        <button mat-menu-item (click)="logout()" [routerLink]="'login'">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </div>
+    </mat-menu>
+  </ng-container>
+</ng-container>
