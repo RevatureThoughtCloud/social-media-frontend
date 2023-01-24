@@ -38,6 +38,7 @@ import { SearchBarUserComponent } from './components/search-bar-user/search-bar-
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PersonalizedFeedComponent } from './components/personalized-feed/personalized-feed.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { PostDetailsComponent } from './components/post-details/post-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     SearchBarUserComponent,
     PersonalizedFeedComponent,
     ResetPasswordComponent,
+    PostDetailsComponent,
   ],
   imports: [
     BrowserModule,
