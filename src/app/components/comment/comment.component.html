@@ -7,8 +7,10 @@
     </div>
     <div class="comment-info">
       <p class="comment-fullname">
-        {{ inputComment.author.firstName }} {{ inputComment.author.lastName }}
+        {{ inputComment.author.firstName }} {{ inputComment.author.lastName
+        }}<verified-icon></verified-icon>
       </p>
+
       <p class="comment-username mat-card-subtitle">
         <a [routerLink]="['/profile/', inputComment.author.id]"
           >@{{ inputComment.author.userName }}</a

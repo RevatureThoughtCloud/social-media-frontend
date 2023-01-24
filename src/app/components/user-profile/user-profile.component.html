@@ -21,7 +21,10 @@
             Edit Profile
           </button>
         </h2>
-        <h3>{{ profileOwner.firstName }} {{ profileOwner.lastName }}</h3>
+        <h3>
+          {{ profileOwner.firstName }} {{ profileOwner.lastName
+          }}<verified-icon></verified-icon>
+        </h3>
         <h4>{{ profileOwner.aboutMe }}</h4>
       </div>
       <ng-template #editProfileForm>

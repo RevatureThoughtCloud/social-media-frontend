@@ -7,8 +7,9 @@
         </a>
       </div>
       <mat-card-title
-        >{{ post.author.firstName }} {{ post.author.lastName }}</mat-card-title
-      >
+        >{{ post.author.firstName }} {{ post.author.lastName
+        }}<verified-icon></verified-icon
+      ></mat-card-title>
       <mat-card-subtitle
         ><a [routerLink]="['/profile/', post.author.id]"
           >@{{ post.author.userName }}</a
