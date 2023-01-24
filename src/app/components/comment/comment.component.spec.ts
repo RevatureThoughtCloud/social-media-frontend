@@ -2,6 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
 import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,7 +13,9 @@ import { CommentComponent } from './comment.component';
 describe('CommentComponent', () => {
   let component: CommentComponent;
   let fixture: ComponentFixture<CommentComponent>;
-  let service: AuthService;
+  let authService: AuthService;
+  let postService: PostService;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
@@ -20,12 +23,14 @@ describe('CommentComponent', () => {
         StoreModule.forRoot({ auth: authReducer }),
         ReactiveFormsModule,
       ],
-      providers: [PostService, AuthService],
+      providers: [PostService, AuthService, provideMockStore({})],
       declarations: [CommentComponent],
     }).compileComponents();
     fixture = TestBed.createComponent(CommentComponent);
     component = fixture.componentInstance;
-    const user = new User(
+    postService = TestBed.inject(PostService);
+    authService = TestBed.inject(AuthService);
+    const author = new User(
       1,
       'test@email.com',
       'firstName',
@@ -34,9 +39,16 @@ describe('CommentComponent', () => {
       0,
       0
     );
-    component.inputComment = new Post(0, '', '', user, [], 'Comment');
-    service = TestBed.inject(AuthService);
-    fixture.detectChanges();
+    const comment = new Post(
+      1,
+      'This is a comment',
+      '',
+      author,
+      [],
+      'Comment',
+      0
+    );
+    component.inputComment = comment;
   });
 
   it('should create', () => {
