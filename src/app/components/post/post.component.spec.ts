@@ -8,7 +8,7 @@ import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
 import { FormGroup, FormControl } from '@angular/forms';
 
-fdescribe('PostComponent', () => {
+describe('PostComponent', () => {
   let component: PostComponent;
   let fixture: ComponentFixture<PostComponent>;
   let postService: PostService;
