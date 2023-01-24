@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Logout2 } from 'src/app/store/reducer.module';
 import { AuthState } from 'src/app/store/reducers/auth.reducer';
+import { PreferencesState } from 'src/app/store/reducers/user-preferences.reducers';
 
 @Component({
   selector: 'info-popover',
@@ -11,8 +12,12 @@ import { AuthState } from 'src/app/store/reducers/auth.reducer';
 })
 export class UserInfoPopoverComponent {
   auth$: Observable<AuthState>;
-  constructor(private store: Store<{ auth: AuthState }>) {
+  preferences$: Observable<PreferencesState>;
+  constructor(
+    private store: Store<{ preferences: PreferencesState; auth: AuthState }>
+  ) {
     this.auth$ = store.select('auth');
+    this.preferences$ = store.select('preferences');
   }
 
   logout() {

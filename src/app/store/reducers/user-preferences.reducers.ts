@@ -3,10 +3,7 @@ import {
   SIDEBAR_EXPANDED,
 } from '../actions/user-preferences.actions';
 
-const themes: string[] = [
-  'darkMode mat-app-background root',
-  'mat-pap-background root',
-];
+const themes: string[] = ['darkMode mat-app-background', 'mat-pap-background'];
 
 export interface PreferencesState {
   theme: string;
