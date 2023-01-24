@@ -4,7 +4,10 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-    <span class="mx-4 logo" [routerLink]="['/post-feed']">ThoughtCloud</span>
+    <span class="mx-4 logo" [routerLink]="['/post-feed']"
+      >ThoughtCloud
+      <img class="filter" src="../../../assets/images/thoughtcloud_icon.png" alt="Logo" />
+    </span>
     <button
       mat-icon-button
       color="accent"
@@ -26,7 +29,12 @@
       >
     </button>
     <mat-menu #menu="matMenu">
-      <a routerLink="/notifications" mat-menu-item *ngFor="let notification of notes$ | async" >{{notification.sender.userName}} {{ notification.message }}</a>
+      <a
+        routerLink="/notifications"
+        mat-menu-item
+        *ngFor="let notification of notes$ | async"
+        >{{ notification.sender.userName }} {{ notification.message }}</a
+      >
     </mat-menu>
     <span class="spacer"></span>
     <search-bar-user></search-bar-user>
