@@ -1,3 +1,4 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, waitForAsync, TestBed } from '@angular/core/testing';
 import { Router, ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
@@ -25,6 +26,7 @@ describe('PostDetailsComponent', () => {
     post = new Post(1, 'test post', 'test content', user, [], 'Post');
     TestBed.configureTestingModule({
       declarations: [PostDetailsComponent],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [
         { provide: PostService, useValue: { postById: () => of(post) } },
         { provide: AuthService, useValue: {} },
