@@ -7,8 +7,10 @@
     </div>
     <div class="comment-info">
       <p class="comment-fullname">
-        {{ inputComment.author.firstName }} {{ inputComment.author.lastName }}
+        {{ inputComment.author.firstName }} {{ inputComment.author.lastName
+        }}<verified-icon></verified-icon>
       </p>
+
       <p class="comment-username mat-card-subtitle">
         <a [routerLink]="['/profile/', inputComment.author.id]"
           >@{{ inputComment.author.userName }}</a
@@ -31,7 +33,7 @@
         (click)="handleDelete()"
         *ngIf="
           inputComment.author.id === currentUser.id ||
-          originalPosterId === currentUser.id
+          parentPost.author.id === currentUser.id
         "
       >
         <mat-icon>delete</mat-icon>
@@ -44,13 +46,13 @@
   <ng-template #editFormTemplate>
     <form class="form" [formGroup]="editForm" (ngSubmit)="handleEdit()">
       <mat-form-field class="full-width" appearance="fill">
-        <textarea matInput autofocus formControlName="text"></textarea>
+        <textarea matInput autofocus formControlName="text" id="textInput"></textarea>
       </mat-form-field>
       <div align="end">
         <button mat-raised-button color="warn" (click)="toggleEdit()">
           Cancel
         </button>
-        <button mat-raised-button color="primary" type="submit">Submit</button>
+        <button id="testClass" mat-raised-button color="primary" type="submit">Submit</button>
       </div>
     </form>
   </ng-template>
@@ -81,27 +83,30 @@
       </button>
     </div>
     <form
+      id="replyForm"
       class="form"
       *ngIf="replyToComment"
       [formGroup]="commentForm"
       (ngSubmit)="submitReply($event)"
     >
-      <mat-form-field class="full-width" appearance="fill">
+      <mat-form-field  class="full-width" appearance="fill">
         <mat-label>Make a Post</mat-label>
-        <textarea matInput autofocus formControlName="text"></textarea>
+        <textarea  id="textPost2" matInput autofocus formControlName="text"></textarea>
       </mat-form-field>
       <div align="end">
         <button mat-raised-button color="warn" (click)="toggleReplyToComment()">
           Cancel
         </button>
-        <button mat-raised-button color="primary" type="submit">Post</button>
+        <button id="submitPostButton" mat-raised-button color="primary" type="submit">Post</button>
       </div>
     </form>
   </div>
   <div *ngFor="let comment of inputComment.comments" class="comment-container">
     <app-comment
       [comment]="comment"
+      [parentPost]="inputComment"
       (handleDeletePost)="handleCommentDelete($event)"
+      (handleNewComment)="updateForNewComment($event)"
     ></app-comment>
   </div>
 </div>

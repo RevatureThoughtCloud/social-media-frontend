@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import User from '../models/User';
 import { LoginSuccess, LogoutSuccess } from '../store/actions/auth.actions';
 import { AuthState } from '../store/reducers/auth.reducer';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +21,11 @@ export class AuthService {
   ) {
     this.auth$ = store.select('auth');
     this.auth$.subscribe((res) => {
-      this.currentUser = res.user ?? new User(0, '', '', '', '');
+      if(res==undefined){return;}
+      if(res.user !=undefined){
+        this.currentUser = res.user ?? new User(0, '', '', '', '');
+      }
+
     });
   }
 
@@ -30,6 +35,27 @@ export class AuthService {
       headers: environment.headers,
       withCredentials: environment.withCredentials,
     });
+  }
+
+  resetPassTokenRequest(userEmail: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.authUrl}/reset-password`,
+      { userEmail },
+      {
+        headers: environment.headers,
+      }
+    );
+  }
+
+  resetPass(newPassword: string, token: string): Observable<any> {
+    return this.http.post<any>(
+      `${this.authUrl}/reset-password`,
+      { newPassword },
+      {
+        headers: environment.headers,
+        params: { token: token },
+      }
+    );
   }
 
   isLoggedIn(): boolean {

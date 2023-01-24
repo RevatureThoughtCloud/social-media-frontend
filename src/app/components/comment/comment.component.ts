@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
 import Like from 'src/app/models/Like';
 import Post from 'src/app/models/Post';
+import { getImage } from 'src/app/pictures';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
-import { getImage } from 'src/app/pictures';
+
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -20,21 +21,34 @@ export class CommentComponent implements OnInit {
   editPost: boolean = false;
 
   @Output() handleDeletePost = new EventEmitter();
+  @Output() handleNewComment = new EventEmitter();
 
   @Input('comment') inputComment: Post;
+  @Input('parentPost') parentPost: Post;
   replies: number;
   replyToComment: boolean = false;
   userLikedPost: boolean = false;
+  parentPostId: number | undefined;
 
-  @Input('posterId') originalPosterId: number;
+  @Input('comment')
+  set myVar(data: Post) {
+    this.inputComment = data;
+  }
+
+  @Input('parentPost')
+  set myVar2(data: Post) {
+    this.parentPost = data;
+  }
+
 
   constructor(
     private postService: PostService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.replies = this.inputComment.comments.length;
+
     this.postService
       .likeExists(this.inputComment, this.authService.currentUser)
       .subscribe((response) => {
@@ -69,6 +83,7 @@ export class CommentComponent implements OnInit {
         this.inputComment = response;
         this.replies = response.comments.length;
         this.toggleReplyToComment();
+        this.handleNewComment.emit(this.inputComment);
       });
   };
 
@@ -110,8 +125,26 @@ export class CommentComponent implements OnInit {
       this.editPost = !this.editPost;
     });
   }
+  /* *********************** Update Comments ****************************** */
+  updateForNewComment(comment: Post) {
+    this.inputComment.comments.forEach((element, index) => {
+      if (element.id == comment.id) {
+        this.inputComment.comments[index] = comment;
+      }
+    })
+    this.postService
+      .upsertPost({
+        ...this.inputComment,
+        comments: [...this.inputComment.comments],
+      })
+      .subscribe((response) => {
+        this.inputComment = response;
+        this.replies = response.comments.length;
+      });
+    this.handleNewComment.emit(this.inputComment);
+  }
 
-  /* ***************************************************** */
+   /* *********************** Like Post ****************************** */
 
   updateLikes() {
     this.postService.postById(this.inputComment.id).subscribe((response) => {

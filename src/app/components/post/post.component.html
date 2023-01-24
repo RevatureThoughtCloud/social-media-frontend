@@ -7,8 +7,9 @@
         </a>
       </div>
       <mat-card-title
-        >{{ post.author.firstName }} {{ post.author.lastName }}</mat-card-title
-      >
+        >{{ post.author.firstName }} {{ post.author.lastName
+        }}<verified-icon></verified-icon
+      ></mat-card-title>
       <mat-card-subtitle
         ><a [routerLink]="['/profile/', post.author.id]"
           >@{{ post.author.userName }}</a
@@ -60,10 +61,11 @@
       </ng-template>
     </mat-card-content>
     <mat-card-actions align="end">
-      <div class="icon-div">
+      <div [routerLink]="['/post-details', post.id]" class="icon-div">
         <i class="fa-regular fa-comment"></i>
         <p>{{ replies }}</p>
       </div>
+
       <div class="icon-div">
         <i
           [ngClass]="
@@ -76,7 +78,12 @@
         <p>{{ post.likeCount == 0 ? "" : post.likeCount }}</p>
       </div>
 
-      <button mat-raised-button color="primary" (click)="toggleReplyToPost()">
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="detailedView"
+        (click)="toggleReplyToPost()"
+      >
         Reply
       </button>
     </mat-card-actions>
@@ -97,12 +104,13 @@
         <button mat-raised-button color="primary" type="submit">Post</button>
       </div>
     </form>
-    <mat-card-footer>
+    <mat-card-footer *ngIf="detailedView">
       <div *ngFor="let comment of post.comments" class="comment-container">
         <app-comment
           [comment]="comment"
-          [posterId]="post.author.id"
+          [parentPost]="post"
           (handleDeletePost)="handleCommentDelete($event)"
+          (handleNewComment)="updateForNewComment($event)"
         ></app-comment>
       </div>
     </mat-card-footer>

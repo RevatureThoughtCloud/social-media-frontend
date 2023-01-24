@@ -21,7 +21,10 @@
             Edit Profile
           </button>
         </h2>
-        <h3>{{ profileOwner.firstName }} {{ profileOwner.lastName }}</h3>
+        <h3>
+          {{ profileOwner.firstName }} {{ profileOwner.lastName
+          }}<verified-icon></verified-icon>
+        </h3>
         <h4>{{ profileOwner.aboutMe }}</h4>
       </div>
       <ng-template #editProfileForm>
@@ -71,7 +74,17 @@
   </div>
 </div>
 <div class="container">
-  <div id="post-feed" *ngFor="let post of posts">
-    <app-post (handleDeletePost)="deletePost($event)" [post]="post"></app-post>
-  </div>
+  <cdk-virtual-scroll-viewport
+    itemSize="100"
+    minBufferPx="1000"
+    maxBufferPx="10000"
+    class="scrollview"
+  >
+    <div id="post-feed" *cdkVirtualFor="let post of posts">
+      <app-post
+        (handleDeletePost)="deletePost($event)"
+        [post]="post"
+      ></app-post>
+    </div>
+  </cdk-virtual-scroll-viewport>
 </div>

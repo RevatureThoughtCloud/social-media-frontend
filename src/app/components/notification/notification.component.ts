@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { EventManager } from '@angular/platform-browser';
 import Notification from 'src/app/models/Notification';
-import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-notification',
@@ -11,7 +9,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 export class NotificationComponent {
 
 
-  constructor(private notiService: NotificationService){}
+  constructor(){}
 
   @Input() notification: Notification;
 

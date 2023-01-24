@@ -37,6 +37,11 @@ import { UserInfoPopoverComponent } from './components/user-info-popover/user-in
 import { SearchBarUserComponent } from './components/search-bar-user/search-bar-user.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PersonalizedFeedComponent } from './components/personalized-feed/personalized-feed.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { VerifiedAccountComponent } from './components/verified-account/verified-account.component';
+
+import { PostDetailsComponent } from './components/post-details/post-details.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,8 +62,13 @@ import { PersonalizedFeedComponent } from './components/personalized-feed/person
     UserInfoPopoverComponent,
     SearchBarUserComponent,
     PersonalizedFeedComponent,
+    ResetPasswordComponent,
+    VerifiedAccountComponent,
+
+    PostDetailsComponent,
   ],
   imports: [
+    ScrollingModule,
     BrowserModule,
     MatAutocompleteModule,
     AppRoutingModule,
@@ -84,5 +94,5 @@ import { PersonalizedFeedComponent } from './components/personalized-feed/person
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(private store: Store<GeneralEntityAppState>) {}
+  constructor(private store: Store<GeneralEntityAppState>) { }
 }

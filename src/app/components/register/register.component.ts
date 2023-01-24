@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
     password: new FormControl(''),
   });
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private ngZone: NgZone) { }
 
   ngOnInit(): void { }
 
@@ -31,8 +31,10 @@ export class RegisterComponent implements OnInit {
         this.registerForm.value.password || '',
         this.registerForm.value.userName || ''
       )
-      .subscribe((response) => {
+      .subscribe((_response) => {
+        this.ngZone.run(() => {
         this.router.navigate(['login']);
+      });
       });
   }
 }
