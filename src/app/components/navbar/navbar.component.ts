@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import Notification from 'src/app/models/Notification';
 import { AuthService } from 'src/app/services/auth.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import {
@@ -22,7 +23,7 @@ export class NavbarComponent implements OnInit {
   public preferences$: Observable<PreferencesState>;
   public auth$: Observable<AuthState>;
   public isExpanded: boolean = false;
-  public notes$: any;
+  public notes$: Observable<Notification[]>;
 
   constructor(
     private notiService: NotificationService,

@@ -39,12 +39,18 @@
       >
     </button>
     <mat-menu class="{{ (preferences$ | async)?.theme }}" #menu="matMenu">
+      <div *ngIf="notes$ | async as notes">
+      <a *ngIf="notes.length == 0" mat-menu-item routerLink="/notifications">
+        No unread notifications!
+      </a>
+    </div>
+      
       <a
         routerLink="/notifications"
         mat-menu-item
         *ngFor="let notification of notes$ | async"
         >{{ notification.sender.userName }} {{ notification.message }}</a
-      >
+      >    
     </mat-menu>
     <span class="spacer"></span>
     <search-bar-user *ngIf="auth.loggedIn"></search-bar-user>
