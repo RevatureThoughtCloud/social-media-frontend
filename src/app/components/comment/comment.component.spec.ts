@@ -14,6 +14,10 @@ import { CommentComponent } from './comment.component';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { ComponentHarness } from '@angular/cdk/testing';
+import { AngularMaterialModule } from 'src/app/modules/angular-material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { of } from 'rxjs';
 describe('CommentComponent', () => {
   let component: CommentComponent;
   let fixture: ComponentFixture<CommentComponent>;
@@ -74,7 +78,10 @@ describe('CommentComponent', () => {
         HttpClientTestingModule,
         StoreModule.forRoot({ auth: authReducer }),
         ReactiveFormsModule,
+        AngularMaterialModule,
+        BrowserAnimationsModule
       ],
+      schemas: [NO_ERRORS_SCHEMA],
       providers: [PostService, AuthService, provideMockStore({initialState:{user: authorUser, loggedIn: false,
           loggingIn: false,error: false,
           errorResponse: '',verifying: false,}})],
@@ -123,8 +130,6 @@ describe('CommentComponent', () => {
     expect(text).toBe("hello");
     fixture.detectChanges();
 
-    spyOn(postService, 'upsertPost');
-    component.ngOnInit();
     let newComment = new Post(
       2,
       'hello',
@@ -133,6 +138,8 @@ describe('CommentComponent', () => {
       [],
       'Comment'
     );
+    spyOn(postService, 'upsertPost').and.returnValue(of(newComment));
+    component.ngOnInit();
     await rfHarness.clickSubmit();
     expect(postService.upsertPost).toHaveBeenCalledWith(newComment);
 
@@ -150,8 +157,6 @@ describe('CommentComponent', () => {
     expect(text).toBe("hello");
 
     fixture.detectChanges();
-    spyOn(postService, 'upsertPost');
-    component.ngOnInit();
     let copyInput = new Post(
       0,
       'hello',
@@ -160,6 +165,8 @@ describe('CommentComponent', () => {
       [],
       'Reply'
     );
+    spyOn(postService, 'upsertPost').and.returnValue(of(copyInput));
+    component.ngOnInit();
     parentPost.comments.push(parentPost);
     await rfHarness.clickSubmit();
 

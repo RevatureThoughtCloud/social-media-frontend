@@ -9,6 +9,9 @@ import User from 'src/app/models/User';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { UserCardComponent } from '../user-card/user-card.component';
+import Like from 'src/app/models/Like';
+import { of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PostComponent', () => {
   let component: PostComponent;
@@ -20,6 +23,7 @@ describe('PostComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatCardModule],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [PostComponent, UserCardComponent],
       providers: [AuthService, PostService, provideMockStore({})],
     }).compileComponents();
@@ -89,5 +93,26 @@ describe('PostComponent', () => {
     );
     component.updateForNewComment(newComment);
     expect(component.post.comments[0].text).toEqual('Edited test comment');
+  });
+
+  it ('should update the like count on like', () => {
+    spyOn(postService, "postLike").and.returnValue(of(new Like(component.post, authService.currentUser)));
+    spyOn(postService, "postById").and.returnValue(of(new Post(0, '', '', authService.currentUser, [], '', 1 )));
+
+    const element = document.createElement("i");
+
+    component.handleClick(element);
+    expect(component.post.likeCount).toBe(1);
+  });
+
+  it ('should update the like count on dislike', () => {
+    spyOn(postService, "deleteLike").and.returnValue(of(true));
+    spyOn(postService, "postById").and.returnValue(of(new Post(0, '', '', authService.currentUser, [], '', -1 )));
+
+    const element = document.createElement("i");
+    component.userLikedPost = true;
+
+    component.handleClick(element);
+    expect(component.post.likeCount).toBe(-1);
   });
 });

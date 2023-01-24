@@ -21,14 +21,14 @@ describe('preferencesReducer', () => {
         expect(newState).toEqual({
             ...initialState,
             index: 1,
-            theme: 'mat-pap-background root',
+            theme: 'mat-pap-background',
         });
 
         newState = preferencesReducer(newState, changeTheme);
         expect(newState).toEqual({
             ...initialState,
             index: 0,
-            theme: 'darkMode mat-app-background root',
+            theme: 'darkMode mat-app-background',
         });
     });
 
