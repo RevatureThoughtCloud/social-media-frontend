@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
   public preferences$: Observable<PreferencesState>;
   public auth$: Observable<AuthState>;
   public isExpanded: boolean = false;
+  public notes$: any;
 
   constructor(
     private notiService: NotificationService,
@@ -34,6 +35,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.notiService.getNotificationCount();
+    this.notes$ = this.notiService.getNotificationsLimit5();
   }
 
   ngOnDestroy() {}
@@ -49,6 +51,8 @@ export class NavbarComponent implements OnInit {
   }
 
   toggleNotes(): void {
+    //refresh list when click meny button
+    this.notes$ = this.notiService.getNotificationsLimit5();
     this._menuOpen = !this._menuOpen;
   }
 

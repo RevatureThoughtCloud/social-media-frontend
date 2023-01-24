@@ -106,10 +106,24 @@ export class PostComponent implements OnInit {
       this.editPost = !this.editPost;
     });
   }
+  /* *********************** Update Comments ****************************** */
+  updateForNewComment(comment: Post) {
+    this.post.comments.forEach((element, index) => {
+      if (element.id == comment.id) {
+        this.post.comments[index] = comment;
+      }
+    })
 
-  /* ***************************************************** */
+    this.postService
+    .upsertPost({ ...this.post, comments: [...this.post.comments] })
+    .subscribe((response) => {
+      this.post = response;
+      this.replies = response.comments.length;
+    });
+  }
 
-  //
+
+  /* *********************** Like Post ****************************** */
 
   updateLikes() {
     this.postService.postById(this.post.id).subscribe((response) => {
