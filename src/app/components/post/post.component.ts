@@ -5,6 +5,7 @@ import Post from 'src/app/models/Post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { getImage } from 'src/app/pictures';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
@@ -24,6 +25,7 @@ export class PostComponent implements OnInit {
   replyToPost: boolean = false;
   userLikedPost: boolean = false;
   editPost: boolean = false;
+  @Input('detailedView') detailedView: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -106,10 +108,24 @@ export class PostComponent implements OnInit {
       this.editPost = !this.editPost;
     });
   }
+  /* *********************** Update Comments ****************************** */
+  updateForNewComment(comment: Post) {
+    this.post.comments.forEach((element, index) => {
+      if (element.id == comment.id) {
+        this.post.comments[index] = comment;
+      }
+    })
 
-  /* ***************************************************** */
+    this.postService
+    .upsertPost({ ...this.post, comments: [...this.post.comments] })
+    .subscribe((response) => {
+      this.post = response;
+      this.replies = response.comments.length;
+    });
+  }
 
-  //
+
+  /* *********************** Like Post ****************************** */
 
   updateLikes() {
     this.postService.postById(this.post.id).subscribe((response) => {

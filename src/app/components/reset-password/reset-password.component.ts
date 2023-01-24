@@ -1,15 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { Login } from 'src/app/store/actions/auth.actions';
-import {
-  GetFollowers,
-  GetFollowings,
-} from 'src/app/store/actions/user-data.actions';
-import { AuthOnlyState } from 'src/app/store/app.state';
 import { AuthState } from 'src/app/store/reducers/auth.reducer';
 
 @Component({
