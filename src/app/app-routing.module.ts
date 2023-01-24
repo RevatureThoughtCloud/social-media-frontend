@@ -9,20 +9,45 @@ import { PostFeedPageComponent } from './components/post-feed-page/post-feed-pag
 import { RegisterComponent } from './components/register/register.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { AuthGuard } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'personalized-feed', component: PersonalizedFeedComponent },
-  { path: 'post-feed', component: PostFeedPageComponent },
-  { path: 'post-details/:postid', component: PostDetailsComponent },
-  { path: 'profile/:id', component: UserProfileComponent },
+  {
+    path: 'personalized-feed',
+    component: PersonalizedFeedComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'post-feed',
+    component: PostFeedPageComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'post-details/:postid',
+    component: PostDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile/:id',
+    component: UserProfileComponent,
+    canActivate: [AuthGuard],
+  },
 
-  { path: 'notifications', component: NotificationListComponent },
+  {
+    path: 'notifications',
+    component: NotificationListComponent,
+    canActivate: [AuthGuard],
+  },
   //until 404 component is made, redirect to post-feed if nonexistent route
-  { path: '**', redirectTo: '/post-feed', pathMatch: 'full' },
+  {
+    path: '**',
+    redirectTo: '/post-feed',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

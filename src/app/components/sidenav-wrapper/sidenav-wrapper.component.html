@@ -1,20 +1,31 @@
 <mat-sidenav-container fixedInViewport="true" autosize>
-  <mat-sidenav #sidenav mode="side" opened="isExpanded">
+  <mat-sidenav
+    #sidenav
+    mode="side"
+    opened="isExpanded"
+    *ngIf="(auth$ | async)?.loggedIn"
+  >
     <mat-nav-list>
       <mat-list-item [routerLink]="'personalized-feed'">
         <mat-icon mat-list-icon>home</mat-icon>
-        <span *ngIf="isExpanded" class="menu-item">Dashboard</span>
+        <span *ngIf="isExpanded" class="menu-item">Home</span>
       </mat-list-item>
 
-      <mat-list-item [routerLink]="'info'">
-        <mat-icon mat-list-icon>important_devices</mat-icon>
-        <span *ngIf="isExpanded" class="menu-item">Info</span>
+      <mat-list-item [routerLink]="'post-feed'">
+        <mat-icon mat-list-icon>public</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Browse</span>
       </mat-list-item>
 
       <mat-list-item [routerLink]="'user'">
-        <mat-icon mat-list-icon>supervisor_account</mat-icon>
-        <span *ngIf="isExpanded" class="menu-item">User</span>
+        <mat-icon mat-list-icon>newspaper</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">News</span>
       </mat-list-item>
+
+      <mat-list-item [routerLink]="'user'">
+        <mat-icon mat-list-icon>trending_up</mat-icon>
+        <span *ngIf="isExpanded" class="menu-item">Trending</span>
+      </mat-list-item>
+
       <mat-divider></mat-divider>
       <div><span *ngIf="isExpanded" class="menu-item">Followings</span></div>
       <mat-list-item

@@ -1,6 +1,11 @@
 <mat-toolbar *ngIf="auth$ | async as auth">
   <mat-toolbar-row>
-    <button mat-icon-button color="accent" (click)="expandSideNav()">
+    <button
+      mat-icon-button
+      color="accent"
+      (click)="expandSideNav()"
+      *ngIf="auth.loggedIn"
+    >
       <mat-icon>menu</mat-icon>
     </button>
 
@@ -21,6 +26,7 @@
       <mat-icon>invert_colors</mat-icon>
     </button>
     <button
+      *ngIf="auth.loggedIn"
       mat-icon-button
       [matMenuTriggerFor]="menu"
       (menuOpened)="toggleNotes()"
@@ -41,7 +47,7 @@
       >
     </mat-menu>
     <span class="spacer"></span>
-    <search-bar-user></search-bar-user>
+    <search-bar-user *ngIf="auth.loggedIn"></search-bar-user>
     <span class="spacer"></span>
     <span class="spacer"></span>
     <info-popover class="darkMode mat-app-background"></info-popover>
