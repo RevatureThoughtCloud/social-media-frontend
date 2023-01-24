@@ -30,8 +30,16 @@ export class CommentComponent implements OnInit {
   userLikedPost: boolean = false;
   parentPostId: number | undefined;
 
-  
-  
+  @Input('comment')
+  set myVar(data: Post) {
+    this.inputComment = data;
+  }
+
+  @Input('parentPost')
+  set myVar2(data: Post) {
+    this.parentPost = data;
+  }
+
 
   constructor(
     private postService: PostService,

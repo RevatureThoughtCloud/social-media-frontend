@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { UserCardComponent } from '../user-card/user-card.component';
 import Like from 'src/app/models/Like';
 import { of } from 'rxjs';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('PostComponent', () => {
   let component: PostComponent;
@@ -22,6 +23,7 @@ describe('PostComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, MatCardModule],
+      schemas: [NO_ERRORS_SCHEMA],
       declarations: [PostComponent, UserCardComponent],
       providers: [AuthService, PostService, provideMockStore({})],
     }).compileComponents();

@@ -1,55 +1,55 @@
 .entire-comment {
-    border-left: 2px outset  rgba(144, 144, 144, 0.17);
-    padding-left: 1%;
+  border-left: 2px outset rgba(144, 144, 144, 0.17);
+  padding-left: 1%;
 }
 
-.mat-card-subtitle a{
-    color: inherit;
-    text-decoration: inherit;
+.mat-card-subtitle a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 .comment-head {
-    display: flex;
-    margin-top: 2%;
-    margin-bottom: 2%;
+  display: flex;
+  margin-top: 2%;
+  margin-bottom: 2%;
 }
 
 .header-image {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .comment-info * {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .comment-fullname {
-    font-weight: 500;
-    font-size: 1.25em;
+  font-weight: 500;
+  font-size: 1.25em;
 }
 
 .comment-reply {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .comment-actions {
-    display: flex;
-    justify-content: end;
-    margin-bottom: 2%;
-    margin-right: 1%;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 2%;
+  margin-right: 1%;
 }
 
 .icon-div {
-    margin-right: 2%;
-    display: flex;
-    font-size: 18px;
-    padding-top: 4px;
-  }
-  
-  .icon-div i {
-    font-size: 20px;
-    margin-right: 10%;
-  }
-  
-  .fa-solid {
-    color: red;  
-  }
+  margin-right: 2%;
+  display: flex;
+  font-size: 18px;
+  padding-top: 4px;
+}
+
+.icon-div i {
+  font-size: 20px;
+  margin-right: 10%;
+}
+
+.fa-solid {
+  color: red;
+}
