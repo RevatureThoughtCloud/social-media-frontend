@@ -40,8 +40,8 @@ export class SidenavWrapperComponent {
 
   ngOnInit(): void {
     this.auth$.subscribe((res: AuthState) => {
-      this.currentUser = res.user;
-      if (res.user) {
+      if (res && res.user && res.user.userName) {
+        this.currentUser = res.user;
         this.store.dispatch(new GetFollowings(res.user?.userName ?? ''));
         this.store.dispatch(new GetFollowers(res.user?.userName ?? ''));
       }

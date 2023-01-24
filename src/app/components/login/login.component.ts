@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth$.subscribe((res: AuthState) => {
-      if (res.loggedIn) {
+      if (res && res.loggedIn) {
         this.router.navigate(['personalized-feed']);
         this.notificationService.getNotificationCount();
       }
