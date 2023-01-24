@@ -41,6 +41,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { VerifiedAccountComponent } from './components/verified-account/verified-account.component';
 
 import { PostDetailsComponent } from './components/post-details/post-details.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,6 +68,7 @@ import { PostDetailsComponent } from './components/post-details/post-details.com
     PostDetailsComponent,
   ],
   imports: [
+    ScrollingModule,
     BrowserModule,
     MatAutocompleteModule,
     AppRoutingModule,
@@ -92,5 +94,5 @@ import { PostDetailsComponent } from './components/post-details/post-details.com
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(private store: Store<GeneralEntityAppState>) {}
+  constructor(private store: Store<GeneralEntityAppState>) { }
 }
