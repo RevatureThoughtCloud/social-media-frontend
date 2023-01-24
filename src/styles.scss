@@ -32,7 +32,7 @@ $angular-dark-theme: mat.define-dark-theme(
   )
 );
 :root {
-  --noti-color:  rgb(63, 32, 240);
+  --noti-color: rgb(63, 32, 240);
   --noti-hoover: rgba(63, 32, 240, 0.6);
 }
 
@@ -40,7 +40,6 @@ $angular-dark-theme: mat.define-dark-theme(
   @include mat.all-component-colors($angular-dark-theme);
   --noti-color: #d63384;
   --noti-hoover: #d6338494;
-;
 }
 
 html,
@@ -222,4 +221,9 @@ body {
 
 .spacer {
   flex: 1 1 auto;
+}
+
+.scrollview {
+  height: 100vh;
+ 
 }
