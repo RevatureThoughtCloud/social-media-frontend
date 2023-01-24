@@ -1,17 +1,9 @@
-import User from 'src/app/models/User';
 import {
-  CHANGE_THEME_SUCCESS,
   CHANGE_THEME,
-  CHANGE_THEME_FAILED,
-  ChangeTheme,
-  RESET_REQ_STATE,
   SIDEBAR_EXPANDED,
 } from '../actions/user-preferences.actions';
 
-const themes: string[] = [
-  'darkMode mat-app-background root',
-  'mat-pap-background root',
-];
+const themes: string[] = ['darkMode mat-app-background', 'mat-pap-background'];
 
 export interface PreferencesState {
   theme: string;

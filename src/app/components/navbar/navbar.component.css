@@ -1,7 +1,13 @@
 .logo {
   cursor: pointer;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 .mat-toolbar {
   position: fixed;
   z-index: 10;
+}
+
+.filter {
+  width: 35px;
 }

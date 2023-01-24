@@ -1,10 +1,12 @@
 import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { NO_ERRORS_SCHEMA } from "@angular/compiler";
 import { ComponentFixture, waitForAsync, TestBed } from "@angular/core/testing";
 import { ActivatedRoute } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
 import { provideMockStore } from "@ngrx/store/testing";
 import { of } from "rxjs";
 import { PostService } from "src/app/services/post.service";
+import { FollowStatusComponent } from "../follow-status/follow-status.component";
 import { UserProfileComponent } from "./user-profile.component";
 
 describe('UserProfileComponent', () => {
@@ -18,7 +20,7 @@ describe('UserProfileComponent', () => {
     route.paramMap = of({ get: () => 1 });
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
-      declarations: [UserProfileComponent],
+      declarations: [UserProfileComponent, FollowStatusComponent],
       providers: [
         { provide: PostService, useValue: postService },
         { provide: ActivatedRoute, useValue: route },

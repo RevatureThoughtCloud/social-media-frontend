@@ -1,5 +1,8 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import Notification from 'src/app/models/Notification';
+import { AngularMaterialModule } from 'src/app/modules/angular-material.module';
 import { NotificationComponent } from './notification.component';
 
 describe('NotificationComponent', () => {
@@ -9,7 +12,9 @@ describe('NotificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NotificationComponent ],      
+      imports:[AngularMaterialModule, BrowserAnimationsModule],
+      declarations: [ NotificationComponent ],
+      schemas: [NO_ERRORS_SCHEMA]      
     })
     .compileComponents();
 

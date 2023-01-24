@@ -2,8 +2,9 @@ import {
   HttpTestingController,
   HttpClientTestingModule,
 } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
+import { of } from 'rxjs';
 import User from '../models/User';
 import { LoginSuccess, LogoutSuccess } from '../store/actions/auth.actions';
 import { authReducer } from '../store/reducers/auth.reducer';
@@ -36,7 +37,7 @@ describe('AuthService', () => {
   });
 
   // login() Unit Test
-  it('should login a user', () => {
+  it('should login a user', fakeAsync(() => {
     const payload = { email: 'email@example.com', password: 'password' };
     const user = new User(
       1,
@@ -45,12 +46,15 @@ describe('AuthService', () => {
       'lastname',
       'username'
     );
+    const spy = spyOn(service, 'login').and.returnValue(of(user));
 
-    const loginSuccess = new LoginSuccess(user);
-    service.login(payload.email, payload.password).subscribe((res) => {
+    service.login(payload.email, payload.password).subscribe(res => {
       expect(res).toEqual(user);
     });
-  });
+    tick()
+    expect(spy).toHaveBeenCalledWith(payload.email, payload.password);
+    
+  }));
 
   // isLoggedIn() Unit Tests
   it('should return true for isLoggedIn() when user is logged in', () => {

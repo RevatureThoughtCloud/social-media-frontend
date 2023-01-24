@@ -1,5 +1,8 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { RouterTestingModule } from "@angular/router/testing";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
+import { AngularMaterialModule } from "src/app/modules/angular-material.module";
 import { GetFollowings, GetFollowers } from "src/app/store/actions/user-data.actions";
 import { SidenavWrapperComponent } from "./sidenav-wrapper.component";
 
@@ -11,6 +14,7 @@ describe('WrapperComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [AngularMaterialModule, BrowserAnimationsModule, RouterTestingModule],
       declarations: [ SidenavWrapperComponent ],
       providers: [provideMockStore({ initialState })]
     }).compileComponents();
