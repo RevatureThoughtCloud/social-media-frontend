@@ -32,47 +32,44 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const materialModules = [
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatCardModule,
-    MatCheckboxModule,
-    MatChipsModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatRippleModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSnackBarModule,
-    MatSortModule,
-    MatTableModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatButtonToggleModule,
-    MatTreeModule,
-    OverlayModule,
-    PortalModule,
-    MatBadgeModule,
-    MatGridListModule,
-    MatRadioModule,
-    MatDatepickerModule,
-    MatTooltipModule
-  ];
-  @NgModule({
-    imports: [
-      CommonModule,
-      ...materialModules
-    ],
-    exports: [
-      ...materialModules
-    ],
-  })
-  export class AngularMaterialModule { }
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatPaginatorModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatFormFieldModule,
+  MatButtonToggleModule,
+  MatTreeModule,
+  OverlayModule,
+  PortalModule,
+  MatBadgeModule,
+  MatGridListModule,
+  MatRadioModule,
+  MatDatepickerModule,
+  MatTooltipModule,
+  ScrollingModule,
+];
+@NgModule({
+  imports: [CommonModule, ...materialModules],
+  exports: [...materialModules],
+})
+export class AngularMaterialModule {}
