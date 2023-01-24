@@ -3,7 +3,7 @@
     <button mat-raised-button [matMenuTriggerFor]="menu" color="accent">
       <mat-icon>person</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu class="{{(preferences$ | async)?.theme}}" #menu="matMenu">
       <div class="userIsAuth">
         <div style="text-align: center">
           <p class="dropdown-item-text">

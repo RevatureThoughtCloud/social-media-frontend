@@ -6,7 +6,11 @@
 
     <span class="mx-4 logo" [routerLink]="['/post-feed']"
       >ThoughtCloud
-      <img class="filter" src="../../../assets/images/thoughtcloud_icon.png" alt="Logo" />
+      <img
+        class="filter"
+        src="../../../assets/images/thoughtcloud_icon.png"
+        alt="Logo"
+      />
     </span>
     <button
       mat-icon-button
@@ -28,7 +32,7 @@
         >notifications_on</mat-icon
       >
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu class="{{ (preferences$ | async)?.theme }}" #menu="matMenu">
       <a
         routerLink="/notifications"
         mat-menu-item
@@ -39,7 +43,8 @@
     <span class="spacer"></span>
     <search-bar-user></search-bar-user>
     <span class="spacer"></span>
-    <info-popover></info-popover>
+    <span class="spacer"></span>
+    <info-popover class="darkMode mat-app-background"></info-popover>
 
     <button *ngIf="!auth.loggedIn" mat-button (click)="goToLogin()">
       Login
