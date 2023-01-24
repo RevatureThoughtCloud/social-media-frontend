@@ -40,6 +40,10 @@ module.exports = function (config) {
         }
       }
     },
+    browserConsoleLogOptions: {
+      terminal: true,
+      level: ""
+    },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
@@ -49,4 +53,5 @@ module.exports = function (config) {
     singleRun: false,
     restartOnFileChange: true
   });
+
 };

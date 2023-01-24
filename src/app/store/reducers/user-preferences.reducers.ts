@@ -1,10 +1,5 @@
-import User from 'src/app/models/User';
 import {
-  CHANGE_THEME_SUCCESS,
   CHANGE_THEME,
-  CHANGE_THEME_FAILED,
-  ChangeTheme,
-  RESET_REQ_STATE,
   SIDEBAR_EXPANDED,
 } from '../actions/user-preferences.actions';
 

@@ -21,7 +21,11 @@ export class AuthService {
   ) {
     this.auth$ = store.select('auth');
     this.auth$.subscribe((res) => {
-      this.currentUser = res.user ?? new User(0, '', '', '', '');
+      if(res==undefined){return;}
+      if(res.user !=undefined){
+        this.currentUser = res.user ?? new User(0, '', '', '', '');
+      }
+
     });
   }
 

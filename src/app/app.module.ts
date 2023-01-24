@@ -38,6 +38,8 @@ import { SearchBarUserComponent } from './components/search-bar-user/search-bar-
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PersonalizedFeedComponent } from './components/personalized-feed/personalized-feed.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { VerifiedAccountComponent } from './components/verified-account/verified-account.component';
+
 import { PostDetailsComponent } from './components/post-details/post-details.component';
 @NgModule({
   declarations: [
@@ -60,6 +62,8 @@ import { PostDetailsComponent } from './components/post-details/post-details.com
     SearchBarUserComponent,
     PersonalizedFeedComponent,
     ResetPasswordComponent,
+    VerifiedAccountComponent,
+
     PostDetailsComponent,
   ],
   imports: [

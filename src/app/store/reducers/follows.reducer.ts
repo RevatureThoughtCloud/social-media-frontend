@@ -26,7 +26,7 @@ export interface FollowReqState {
   isFollowOrUnfollow: boolean;
 }
 
-const defaultState: FollowReqState = {
+export const defaultState: FollowReqState = {
   followersUserName: '',
   followingsUserName: '',
   inProgress: false,
