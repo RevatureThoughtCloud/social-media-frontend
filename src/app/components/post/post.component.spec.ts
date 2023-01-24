@@ -7,6 +7,8 @@ import { PostService } from 'src/app/services/post.service';
 import Post from 'src/app/models/Post';
 import User from 'src/app/models/User';
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { UserCardComponent } from '../user-card/user-card.component';
 
 describe('PostComponent', () => {
   let component: PostComponent;
@@ -17,8 +19,8 @@ describe('PostComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      declarations: [PostComponent],
+      imports: [HttpClientTestingModule, MatCardModule],
+      declarations: [PostComponent, UserCardComponent],
       providers: [AuthService, PostService, provideMockStore({})],
     }).compileComponents();
   }));
