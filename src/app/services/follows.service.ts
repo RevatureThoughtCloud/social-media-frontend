@@ -1,8 +1,8 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable, catchError, throwError } from "rxjs";
-import { environment } from "src/environments/environment";
-import User from "../models/User";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, catchError, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import User from '../models/User';
 
 const PROTOCOL = 'http';
 const PORT = 8080;
@@ -38,13 +38,15 @@ export class FollowsService {
   }
 
   //a
-  currentUserUnFollow(unfollowUserName: string): Observable<any> {
+  currentUserUnFollow(unfollowUserName: string): Observable<void> {
     return this.http
-      .delete<any>(
+      .delete<void>(
         this.baseUrl + '/user/unfollow/' + unfollowUserName,
 
         {
-          headers: environment.headers,
+          headers: {
+            ...environment.headers,
+          },
           withCredentials: environment.withCredentials,
         }
       )
