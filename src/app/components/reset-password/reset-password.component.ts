@@ -44,7 +44,7 @@ export class ResetPasswordComponent {
     if (this.hasToken) {
       this.authService
         .resetPass(this.newPassword.value || '', this.token)
-        .subscribe((res) => this.router.navigate(['post-feed']));
+        .subscribe((res) => this.router.navigate(['login']));
     } else {
       this.authService
         .resetPassTokenRequest(this.email.value || '')
