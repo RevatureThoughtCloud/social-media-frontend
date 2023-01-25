@@ -44,12 +44,9 @@ $angular-dark-theme: mat.define-dark-theme(
 
 html,
 body {
-  height: 100%;
-}
-body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  max-height: 100vh;
+  max-height: 100%;
 }
 
 .root {
@@ -224,7 +221,6 @@ body {
 }
 
 .scrollview {
-  display: flex;
   height: 85vh;
   width: 90%;
   padding-inline: 50px;
