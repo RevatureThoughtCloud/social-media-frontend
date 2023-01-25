@@ -22,13 +22,14 @@ mat-sidenav-container {
         transform: rotate(180deg);
       }
     }
+    position: fixed;
+    top: 64px;
   }
 }
 mat-sidenav-content {
   padding-top: 1em;
   padding-left: 1em;
   height: 100%;
-  
+
   width: 100%;
-  
 }
