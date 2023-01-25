@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -13,7 +13,7 @@ import { AuthState } from 'src/app/store/reducers/auth.reducer';
 })
 export class ResetPasswordComponent {
   email = new FormControl('');
-  newPassword = new FormControl('');
+  newPassword = new FormControl('', Validators.required);
   token: string = '';
   hasToken: boolean = false;
 
@@ -42,9 +42,13 @@ export class ResetPasswordComponent {
   onSubmit(e: any): void {
     e.preventDefault();
     if (this.hasToken) {
-      this.authService
-        .resetPass(this.email.value || '', this.token)
-        .subscribe((res) => this.router.navigate(['post-feed']));
+      if (this.newPassword.valid) {
+        this.authService
+          .resetPass(this.newPassword.value || '', this.token)
+          .subscribe((res) => this.router.navigate(['login']));
+      } else {
+        console.warn('Type in your new password');
+      }
     } else {
       this.authService
         .resetPassTokenRequest(this.email.value || '')
