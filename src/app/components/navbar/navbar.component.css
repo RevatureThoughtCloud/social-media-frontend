@@ -1,5 +1,5 @@
 .logo {
-  font-family: 'Lobster', cursive;
+  font-family: "Lobster", cursive;
   font-size: 1.35em;
   cursor: pointer;
   padding-top: 20px;
@@ -8,6 +8,7 @@
 .mat-toolbar {
   position: fixed;
   z-index: 10;
+  top: 0;
 }
 
 .filter {
