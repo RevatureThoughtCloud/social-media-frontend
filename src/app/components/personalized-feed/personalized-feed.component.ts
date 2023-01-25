@@ -30,7 +30,7 @@ export class PersonalizedFeedComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private authService: AuthService,
+    public authService: AuthService,
     private store: Store<{ userInfo: UserDataReqState }>
   ) {
     this.store.select('userInfo').subscribe((res) => {

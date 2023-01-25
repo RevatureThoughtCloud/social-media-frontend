@@ -20,8 +20,8 @@ export class PostFeedPageComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private authService: AuthService
-  ) { }
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.postService.getAllTopPosts().subscribe((response) => {
