@@ -75,12 +75,12 @@
 </div>
 <div class="container">
   <cdk-virtual-scroll-viewport
-    itemSize="100"
-    minBufferPx="1000"
+    itemSize="200"
+    minBufferPx="200"
     maxBufferPx="10000"
     class="scrollview"
   >
-    <div id="post-feed" *cdkVirtualFor="let post of posts">
+    <div class="post-feed" *cdkVirtualFor="let post of posts">
       <app-post
         (handleDeletePost)="deletePost($event)"
         [post]="post"
