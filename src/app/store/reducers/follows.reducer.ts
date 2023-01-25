@@ -46,18 +46,22 @@ export function followReducer(
       const followUser = action as Follow;
       return {
         ...state,
+        error: false,
         followersUserName: 'CURRENTUSER',
         inProgress: true,
         followingsUserName: followUser.username,
+        completed: false,
         isFollowOrUnfollow: true,
       };
     case UNFOLLOW:
       const unfollowUser = action as UnFollow;
       return {
         ...state,
+        error: false,
         followersUserName: 'CURRENTUSER',
         inProgress: true,
         followingsUserName: unfollowUser.username,
+        completed: false,
         isFollowOrUnfollow: false,
       };
     case FOLLOW_SUCCESS:
