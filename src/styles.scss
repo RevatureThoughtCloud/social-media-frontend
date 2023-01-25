@@ -44,16 +44,13 @@ $angular-dark-theme: mat.define-dark-theme(
 
 html,
 body {
-  height: 100%;
-}
-body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   max-height: 100vh;
 }
 
 .root {
-  height: 100%;
+  height: 100vh;
 }
 
 .app-header {
@@ -224,13 +221,17 @@ body {
 }
 
 .scrollview {
-  display: flex;
-  height: 85vh;
+  height: 100vh;
   width: 90%;
   padding-inline: 50px;
   margin-bottom: 2px;
+  position: relative;
 }
 
 .post-feed {
   margin-right: 2rem;
+}
+
+app-navbar {
+  margin: 0;
 }
